@@ -30,14 +30,11 @@ resize() {
 }
 
 new() {
-    fw=5	# width of term font
-    fh=11	# height of term font
-    ib=12	# size of term inner border
+    fw=9	# width of term font
+    fh=15	# height of term font
+    ib=16	# size of term inner border
     ob=4	# size of term windows WM border
 
-    #eval $(crud)
-    #tabbed -n st -cg "${G}" -r 2 st -w '' -t terminal
-   
     read -r W H X Y <<< $(xrectsel '%w %h %x %y') 
     w=$(( ( W - (ib + ob)*2 ) / fw ))
     h=$(( ( H - (ib + ob)*2 ) / fh )) 
