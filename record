@@ -6,7 +6,7 @@
 #
 
 [ $# -eq 0 ] &&
-    video_path="${HOME}/Videos/captures/record-$(date '+%b_%d-%H:%M')" ||
+    video_path="${HOME}/vid/captures/record-$(date '+%b_%d-%H:%M')" ||
     video_path=${1}
 
 set -- `xrectsel '%x %y %w %h'`

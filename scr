@@ -3,7 +3,7 @@
 # scr: take a screenshot.
 # stolen from Dylan Araps, the King of Shell
 
-scr_dir=~/Pictures/screenshots
+scr_dir=~/img/screenshots
 
 printf -v date '%(%F)T' -1
 printf -v time '%(%I-%M-%S)T' -1

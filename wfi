@@ -10,7 +10,7 @@ INTERFACE=wlan0
 main() {
 	sudo killall wpa_supplicant; sudo killall dhcpcd
 	sudo ip l set $INTERFACE up
-	sudo wpa_supplicant -B -c /etc/wpa_supplicant.conf -i $INTERFACE
+	sudo wpa_supplicant -B -c /etc/wpa_supplicant/wpa_supplicant.conf -i $INTERFACE
 	sudo dhcpcd
 }
 
