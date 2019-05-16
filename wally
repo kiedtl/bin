@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#
+# wally - set the wallpaper and lockscreen background
+
+wal -i ~/Pictures/wallpapers --backend wal
+/home/kiedtl/bin/lockscreenset

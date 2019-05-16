@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+scr_dir=~/Pictures/screenshots
+
+printf -v date '%(%F)T' -1
+printf -v time '%(%I-%M-%S)T' -1
+
+mkdir -p "${scr_dir}/${date}"
+scr=${scr_dir}/${date}/${date}-${time}
+
+import -window root "$scr".jpg
+cp -f "$scr".jpg "${scr_dir}/current.jpg"
