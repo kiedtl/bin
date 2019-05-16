@@ -13,7 +13,7 @@ for item in **; do
     nest=${item//[^\/]}
     item=${item//[^[:print:]]/^[}
 
-    printf '%s\n' "${nest//\//│  }├─ ${item##*/}${dir}"
+    printf ' %s\n' "${nest//\//│  }├── ${item##*/}${dir}"
 done
 
-printf '└%s\b┘\n' "${nest//\//──┴}"
+printf ' └%s\b┘\n' "${nest//\//──┴}"
