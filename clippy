@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#
+# clippy: clipboard manager
+
+read text
+echo "$text" | xclip -selection clipboard
