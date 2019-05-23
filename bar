@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+#
+# bar - Dylan Araps
+
+enable -f /usr/lib/bash/sleep sleep
+
+dat() {
+    printf -v dat '%(%R)T' -1
+}
+
+bat() {
+    read -r cur < /sys/class/power_supply/BAT1/capacity
+    read -r sta < /sys/class/power_supply/BAT1/status
+
+    case $cur in
+#        [0-9]|1[0-9])         bat=' ';;
+#        2[0-9]|3[0-9]|4[0-9]) bat=' ';;
+#        5[0-9]|6[0-9])        bat=' ';;
+#        7[0-9]|8[0-9])        bat=' ';;
+#        *)                    bat=' ';;
+        [0-9]|1[0-9])         bat='[=    ]:' ;;
+        2[0-9]|3[0-9]|4[0-9]) bat='[==   ]:' ;;
+        5[0-9]|6[0-9])        bat='[===  ]:' ;;
+        7[0-9]|8[0-9])        bat='[==== ]:' ;;
+        *)                    bat='[=====]:' ;;
+    esac
+
+    [[ $sta == Charging ]] && bat+=' '
+}
+
+vol() {
+    cur=$(amixer get Master | grep -E -o '([0-9])+%')
+    #cur=${cur//%/}
+
+    #if [[ $cur -ge 50 ]]; then
+    #    vol=' '
+	#vol=$(echo -e "\uf028")
+    #else
+    #    vol=''
+	#vol=$(echo -e "\uf027")
+    #fi
+
+    vol="${cur}"
+}
+
+pkill bar
+
+for ((;;)) {
+    . /home/kiedtl/.cache/wal/colors.sh; dat; vol; bat
+    printf '%s   %s   \n' "%{B${color0}}%{F${color15}}" "$dat%{r}$vol  $bat"
+    sleep .1
+} | lemonbar -f "Roboto Mono:size=11" -f "Font Awesome 5 Free Regular:size=12" -g "x30"
