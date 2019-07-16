@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# men - dmenu replacement.
+# men: dmenu replacement.
 
 enable -f /usr/lib/bash/sleep sleep
 pal -r

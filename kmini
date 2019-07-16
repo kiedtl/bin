@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#
+# kmini - connect to the kmini server
+
+USERNAME="kiedtl"
+SERVER=10.0.0.209
+
+main() {
+    ssh -l "${USERNAME}" "${SERVER}" -i ~/.ssh/kmini
+}
+
+main "$@"

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+#
+# clicker - 
+
+main() {
+	while :
+	do
+		xdotool click 3 && echo clicked 3 down up
+		xdotool mousedown 1 && echo clicked 1 down
+		sleep 0.3
+		xdotool mouseup 1  && echo clicked 1 up
+		sleep 0.3
+	done
+}
+
+main "$@"
