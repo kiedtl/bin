@@ -2,5 +2,5 @@
 #
 # wally - set the wallpaper and lockscreen background
 
-wal -i ~/wallpapers --backend wal
+wal -R
 # /home/kiedtl/bin/lockscreenset

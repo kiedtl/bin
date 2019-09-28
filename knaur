@@ -3,7 +3,7 @@
 # knaur - 
 
 main() {
-	~/repos/knaur/bin/knaur "${@}"
+	/home/kiedtl/repos/knaur/bin/knaur "${@}"
 }
 
 main "$@"
