@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#
+# prt - Check what programs are using what ports
+
+main() {
+	netstat -tulpn | grep LISTEN
+}
+
+main "$@"
