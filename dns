@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+#
+# dns - Start PiHole DNS
+
+main() {
+	killall systemd-resolve
+	killall pihole-FTL
+	pihole-FTL
+	pihole restartdns
+	pihole status
+}
+
+main "$@"
