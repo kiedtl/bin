@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#
+# srf - Run Surf with Tabbed (without images, TLS strict, or javascript)
+
+main() {
+	tabbed surf -ipste
+}
+
+main "$@"
