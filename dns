@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #
 # dns - Start PiHole DNS
+# by Kied Llaentenn (@kiedtl)
 
 main() {
 	killall systemd-resolve

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #
 # clicker - 
+# by Kied Llaentenn @kiedtl
 
 main() {
 	while :

@@ -1,4 +1,5 @@
 #!/usr/bin/env pwsh
+# a very old, messy script by Kied Llaentenn (@kiedtl)
 # Usage: pixur [file(s)] [options]
 # Summary: A PowerShell script to print full-color pictures in the terminal.
 # Help: Print full-color RGB pictures in the terminal. Supports PNG, JPEG, and BMP formats.

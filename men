@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #
 # men: dmenu replacement.
+# stolen from Dylan Araps, the King of Shell.
 
 enable -f /usr/lib/bash/sleep sleep
 pal -r

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #
 # clippy: clipboard manager
+# by Kied Llaentenn (@kiedtl)
 
 read text
 echo "$text" | xclip -selection clipboard

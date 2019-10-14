@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #
 # dat: date output for tmux
+# by an unknown Linux fanatic
 
 (("$1" > 62)) && printf "%(%a %d %B - %l:%M %p)T" "-1"

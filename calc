@@ -1,0 +1,10 @@
+#/usr/bin/env bash
+#
+# calc - simple calculator
+# by Kied Llaentenn
+
+main() {
+	echo "$((${A}))"
+}
+
+main "$@"

@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 #
 # ssh - hmmmmmmmm...
+# an old joke by Kied Llaentenn
+# kept here for historical purposes
 
 prompt=$(printf "+\e[1;32mkiedtl@hell\e[1;34m ~ \e[0;32m(master *!?)\e[0m %s" '%')
 

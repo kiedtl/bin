@@ -1,6 +1,7 @@
 #!/bin/bash
 #
 # 0x0: simple pastebin
+# by Dylan Araps
 
 [ $# -eq 0 ] && read inp && set $inp
 [ -f "$1" ] && p=cat || p=echo

@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-#
-# dots - manage dotfiles
-
-main() {
-    git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
-}
-
-main "$@"
