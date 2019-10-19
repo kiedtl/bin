@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-#
-# knaur - 
-
-main() {
-	/home/kiedtl/repos/knaur/bin/knaur "${@}"
-}
-
-main "$@"
