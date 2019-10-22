@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-#
-# start-compton: start compton
-# by Kied Llaentenn
-
-killall -q compton
-compton &
