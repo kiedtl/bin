@@ -2,7 +2,7 @@
 #
 # kna - shortcut for knaur
 # see https://github.com/lptstr/knaur
-# by Kied Llaentenn (@kiedtl)
+# (c) Kied Llaentenn (@kiedtl)
 
 main() {
 	NOEDIT_PKGBUILD=1 MAKEPKG_FLAGS='-sirA' /usr/bin/knaur "$@"

@@ -3,7 +3,7 @@
 # bar - simple bar script based on polybar>lemonbar
 # You can retrieve the polybar config from the following location:
 # https://github.com/kiedtl/dotfiles
-# by Kied Llaentenn
+# (c) Kied Llaentenn
 
 main() {
 	. ${HOME}/.cache/wal/colors.sh

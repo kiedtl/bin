@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # prt - Check what programs are using what ports
-# by Kied Llaentenn (@kiedtl):
+# (c) Kied Llaentenn (@kiedtl):
 
 main() {
 	netstat -tulpn | grep LISTEN

@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 #
 # Create a bash script using a template.
+# partly stolen from Dylan Arap's dotfiles.
 
-[[ $1 ]] || exit 1
+[[ $1 ]] || exit
 
-printf '%s' "\
+echo "\
 #!/bin/sh
 #
 # $1 - $2

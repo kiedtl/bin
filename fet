@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # fet - clear the screen, show pfetch, and run 16. 
-# by Kied Llaentenn (@kiedtl)
+# (c) Kied Llaentenn (@kiedtl)
 
 main() {
 	cls || exit 1

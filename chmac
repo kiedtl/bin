@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # chmac - Change the MAC address temporarily. Must be run as sudo!
-# by Kied Llaentenn (@kiedtl)
+# (c) Kied Llaentenn (@kiedtl)
 
 main() {
 	ifconfig wlan0 down hw ether $1

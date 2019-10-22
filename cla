@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # cla - clear the screen
-# by Kied Llaentenn (@kiedtl)
+# (c) Kied Llaentenn (@kiedtl)
 
 main() {
 	clear

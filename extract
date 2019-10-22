@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #
 # extract - an all-purpose file archive extractor
+# from Manjaro Linux
 
 main() {
     if [ -f $1 ] ; then
