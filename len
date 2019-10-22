@@ -1,0 +1,18 @@
+#!/bin/sh
+#
+# len - get number of lines in a file
+# (c) Kied Llaentenn (@kiedtl)
+# See the LICENSE for more information.
+
+[ "$1" ] || exit 1
+
+main() {
+	lines=1
+	while IFS='\n' read -r _
+	do
+		lines=$((lines + 1))
+	done < "$@"
+	printf "%s\n" "${lines}"
+}
+
+main "$@"
