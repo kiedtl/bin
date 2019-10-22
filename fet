@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#
+# fet - clear the screen, show pfetch, and run 16. 
+# by Kied Llaentenn (@kiedtl)
+
+main() {
+	cls || exit 1
+	kfetch || exit 2
+	16 || exit 3
+}
+
+main "$@"

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# cls - clear the screen
+# cla - clear the screen
 # by Kied Llaentenn (@kiedtl)
 
 main() {
