@@ -1,0 +1,12 @@
+#!/bin/sh
+#
+# clean - remove orphaned packages and clean cache directory
+# (c) Kied Llaentenn (@kiedtl)
+# See the LICENSE for more information.
+
+main() {
+	xbps-remove -Oo
+}
+
+main "$@"
+

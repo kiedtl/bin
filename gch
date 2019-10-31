@@ -1,0 +1,29 @@
+#!/bin/sh
+#
+# gch - glibc chroot
+# (c) Kied Llaentenn (@kiedtl)
+# See the LICENSE for more information.
+
+CHROOT=${1:-/glibc}
+
+main() {
+	printf "%s" "INFO: using directory $CHROOT"
+	printf "%s" "WARN: REMEMBER TO UNMOUNT AFTER COMPLETING CHROOT!! i.e. umount -Rl $CHROOT"
+
+	# prepare chroot
+	mount --bind $CHROOT $CHROOT # some programs work incorrectly without this
+	cp -L /etc/resolv.conf $CHROOT/etc/resolv.conf # for network
+	mount --rbind /proc $CHROOT/proc
+	mount --rbind /sys $CHROOT/sys
+	mount --rbind /dev $CHROOT/dev
+	mount --rbind /run $CHROOT/run
+
+	# xhost prepare
+	xhost +local:
+
+	# chroot
+	chroot $CHROOT /bin/bash
+}
+
+main "$@"
+

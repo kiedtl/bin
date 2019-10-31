@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+# clo - shortcut for peaclock
+# (c) Kied Llaentenn (@kiedtl)
+# See the LICENSE for more information.
+
+main() {
+	unset LANGUAGE
+	LC_ALL=C peaclock
+}
+
+main "$@"
+

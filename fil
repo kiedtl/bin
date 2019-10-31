@@ -1,0 +1,12 @@
+#!/bin/sh
+#
+# fil - files
+# (c) Kied Llaentenn (@kiedtl)
+# See the LICENSE for more information.
+
+main() {
+	/bin/bash -c 'exec nnn'
+}
+
+main "$@"
+
