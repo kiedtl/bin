@@ -1,0 +1,16 @@
+#!/bin/sh
+#
+# 2pow - list powers of 2 
+# (c) Kied Llaentenn (@kiedtl)
+# See the LICENSE for more information.
+
+main() {
+	x=0
+	while true; do 
+		printf "2^${x} : %s\n" $(bc <<< "2^${x}")
+		x=$(($x+1))
+	done
+}
+
+main "$@"
+
