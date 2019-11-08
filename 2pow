@@ -7,7 +7,7 @@
 main() {
 	x=0
 	while true; do 
-		printf "2^${x} : %s\n" $(bc <<< "2^${x}")
+		printf "2^${x} : %s\n" "$(echo "2^${x}" | bc)"
 		x=$(($x+1))
 	done
 }
