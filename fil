@@ -5,7 +5,7 @@
 # See the LICENSE for more information.
 
 main() {
-	/bin/bash -c 'exec nnn'
+	xterm -e "/bin/sh -c 'exec nnn'"
 }
 
 main "$@"
