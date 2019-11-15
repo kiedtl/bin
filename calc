@@ -1,0 +1,21 @@
+#!/bin/bash
+#
+# calc - interactive wrapper on bc
+# (c) Kied Llaentenn (@kiedtl)
+# See the LICENSE for more information.
+
+main() {
+	while true; do
+		printf "\033[1;32m❯❯ \033[1;37m"
+		read -r calc
+		printf "\033[0m"
+		case calc in
+			'exit') exit ;;
+			'clear') clear ;;
+			*) bc <<< "${calc}" ;;
+		esac
+	done
+}
+
+trap "printf \"\033[0m\n\"; exit" SIGINT
+main "$@"
