@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 #
-# calc - interactive wrapper on bc
+# calc - interactive wrapper for bc
 # (c) Kied Llaentenn (@kiedtl)
 # See the LICENSE for more information.
 
@@ -10,12 +10,12 @@ main() {
 		read -r calc
 		printf "\033[0m"
 		case calc in
-			'exit') exit ;;
-			'clear') clear ;;
-			*) bc <<< "${calc}" ;;
+			exit*) printf "\033[0m\n" && exit ;;
+			clear*) clear ;;
+			*) echo "${calc}" | bc -ql ;;
 		esac
 	done
 }
 
-trap "printf \"\033[0m\n\"; exit" SIGINT
+trap "printf \"\033[0m\n\" && exit" INT
 main "$@"
