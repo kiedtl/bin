@@ -1,12 +1,13 @@
 #!/bin/sh
 #
-# clo - shortcut for peaclock
+# v - open file in editor. 
 # (c) Kied Llaentenn (@kiedtl)
 # See the LICENSE for more information.
 
 main() {
-	unset LANGUAGE
-	LC_ALL=C peaclock
+	[ -f "$1" ] && {
+		vim "$1";
+	}
 }
 
 main "$@"
