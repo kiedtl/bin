@@ -28,8 +28,18 @@ resize() {
 }
 
 new() {
+    fw=8
+    fh=19
+    ib=2
+    ob=8
+
     eval $(crud)
-    tabbed -cg "${G}" -r 2 st -w '' -t terminal 
+    #tabbed -n st -cg "${G}" -r 2 st -w '' -t terminal
+    
+    w=$(( ( W - (ib + ob)*2 ) / fw ))
+    h=$(( ( H - (ib + ob)*2 ) / fh )) 
+    
+    st -t terminal -g "${w}x${h}+${X}+${Y}"
 }
 
 delete() {
