@@ -1,0 +1,53 @@
+#!/bin/sh
+#
+# rcmen: menu when right click
+# from r/unixporn: "[dwm] plan 9 feel" by u/_viz_
+# edited by kiedtl:
+# 	- changed hacksaw to crud
+#	- BPX/BCOL make static
+#	- add clear function
+
+
+BPX=4
+BCOL="#fff"
+
+#read -r BPX < /tmp/info/dwm/borders/size
+#read -r BCOL < /tmp/info/dwm/borders/selcol
+
+get_id_interactive() {
+    xid=`xwininfo | grep 'Window id: '`
+    echo ${xid} | cut -d':' -f3 | cut -d' ' -f2
+}
+
+resize() {
+    id=`get_id_interactive`
+    eval $(crud)
+
+    xdotool windowsize ${id} ${W} ${H}
+    xdotool windowmove ${id} ${X} ${Y}
+}
+
+new() {
+    eval $(crud)
+    tabbed -g "${G}" xterm -into
+}
+
+delete() {
+    id=`get_id_interactive`
+    xdotool windowclose ${id}
+}
+
+hide() {
+    id=`get_id_interactive`
+    xdotool windowunmap ${id}
+    [ ${?} -eq 0 ] && echo ${id} >> /tmp/dwm_info/hidden
+}
+
+spawn() {
+    eval $(xdotool getmouselocation --shell)
+    9menu -bg $(cat /tmp/info/dwm/colors/normbg) -fg $(cat /tmp/info/dwm/colors/normfg) \
+          -geometry 100x100+${X}+${Y} -popup                                            \
+          'New:echo new' 'Resize:echo resize' 'Delete: echo delete' 'Hide: echo hide' 'Cancel: exit'
+}
+
+$(spawn)
