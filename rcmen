@@ -29,7 +29,7 @@ resize() {
 
 new() {
     eval $(crud)
-    tabbed -g "${G}" xterm -into
+    tabbed -cg "${G}" -r 2 st -w '' -t terminal 
 }
 
 delete() {

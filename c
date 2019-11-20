@@ -7,11 +7,11 @@
 # Note: this is not a script. it must be sourced to work.
 
 c() {
-	[ -f "$1" ] && { cat "$1"; exit; }
+	[ -f "$1" ] && { cat "$1"; }
 	[ -d "$1" ] && {
-		export PWD="$1"
-		exit
+		cd "$1"
 	}
-	[ -z "$1" ] && { clear; exit; }
-	printf "\033[1mERROR:\033[0m%s\n" "Invalid arguments."
+	[ -z "$1" ] && { clear; }
+
+	#printf "\033[1mERROR: \033[0m%s\n" "Invalid arguments."
 }
