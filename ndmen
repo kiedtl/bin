@@ -1,4 +1,15 @@
 #!/bin/bash
+#
+# ndmen: dmenu wrapper with better defaults
+# usage: ndmen [FILE] [SHELL]
+# 	FILE default: dmenu_path
+#	SHELL default: /bin/sh
+#	example:
+#		ndmen /etc/some_file_with_multiple_lines /bin/cat
+#
+# (c) Kied Llaentenn
+# see the LICENSE for more info.
+
 . "${HOME}/.cache/wal/colors.sh"
 
 set -- $(dimensions) "$@"
@@ -8,4 +19,10 @@ y=$(( $2 / 5 ))
 h=$(( $2 / 50 ))
 shift 2
 
-/sbin/dmenu_path | /sbin/dmenu "$@" -nb "$color0" -nf "$color7" -sb "$color1" -sf "$color7" -p ' > ' -fn 'Terminus:size=11' -l "$h" -x "$x" -y "$y" -wi "$w" | ${SHELL:-"/bin/sh"} &
+[ -z "$1" ] && p="/sbin/dmenu_path"
+[ -f "$1" ] && p="cat $1"
+
+[ -z "$2" ] && s="${SHELL:-"/bin/sh"}" \
+	|| s="cat"
+
+${p} | /sbin/dmenu -nb "$color0" -nf "$color7" -sb "$color1" -sf "$color7" -p ' > ' -fn 'Fixed:size=12' -l "$h" -x "$x" -y "$y" -wi "$w" | "${s}" &
