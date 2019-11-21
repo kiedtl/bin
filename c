@@ -7,7 +7,17 @@
 # Note: this is not a script. it must be sourced to work.
 
 c() {
-	[ -f "$1" ] && { cat "$1"; }
+	[ -f "$1" ] && {
+		case "$1" in
+			*.txt) cat "$1";;
+			*.rs|
+				*.md|
+				*.sh|
+				*.c|
+				*.cpp) bat "$1";;
+			*) cat "$1";
+		esac;
+	}
 	[ -d "$1" ] && {
 		cd "$1"
 	}
