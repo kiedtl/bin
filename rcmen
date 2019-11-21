@@ -6,6 +6,7 @@
 # 	- changed hacksaw to crud
 #	- BPX/BCOL make static
 #	- add clear function
+#	- changed crud to xrectsel
 # NOTE: requires bash due to use of arrays.
 
 BPX=4
@@ -21,7 +22,8 @@ get_id_interactive() {
 
 resize() {
     id=`get_id_interactive`
-    eval $(crud)
+    #eval $(crud)
+    read -r W H X Y <<< $(xrectsel '%w %h %x %y')
 
     xdotool windowsize ${id} ${W} ${H}
     xdotool windowmove ${id} ${X} ${Y}
@@ -36,9 +38,10 @@ new() {
     ib=2
     ob=8
 
-    eval $(crud)
+    #eval $(crud)
     #tabbed -n st -cg "${G}" -r 2 st -w '' -t terminal
-    
+   
+    read -r W H X Y <<< $(xrectsel '%w %h %x %y') 
     w=$(( ( W - (ib + ob)*2 ) / fw ))
     h=$(( ( H - (ib + ob)*2 ) / fh )) 
     
