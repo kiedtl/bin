@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # rcmen: menu when right click
 # from r/unixporn: "[dwm] plan 9 feel" by u/_viz_
@@ -6,7 +6,7 @@
 # 	- changed hacksaw to crud
 #	- BPX/BCOL make static
 #	- add clear function
-
+# NOTE: requires bash due to use of arrays.
 
 BPX=4
 BCOL="#fff"
@@ -60,7 +60,7 @@ spawn() {
     eval $(xdotool getmouselocation --shell)
     9menu -bg $(cat /tmp/info/dwm/colors/normbg) -fg $(cat /tmp/info/dwm/colors/normfg) \
           -geometry 100x100+${X}+${Y} -popup                                            \
-          'trmnl:echo new' 'launch: echo ndmen' 'resize:echo resize' 'delete: echo delete' 'hide: echo hide' 'show:echo show' 'cancel: exit'
+          'new:echo new' 'launch: echo ndmen' 'resize:echo resize' 'delete: echo delete' 'hide: echo hide' 'show:echo show' 'lock: echo slock' 'cancel: echo exit'
 }
 
 $(spawn)
