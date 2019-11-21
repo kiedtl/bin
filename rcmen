@@ -28,6 +28,9 @@ resize() {
 }
 
 new() {
+    # buggy. st launches with a height
+    # smaller than expected.
+    # TODO: fix this.
     fw=8
     fh=19
     ib=2

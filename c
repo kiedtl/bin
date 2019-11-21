@@ -10,11 +10,7 @@ c() {
 	[ -f "$1" ] && {
 		case "$1" in
 			*.txt) cat "$1";;
-			*.rs|
-				*.md|
-				*.sh|
-				*.c|
-				*.cpp) bat "$1";;
+			*.rs|*.md|*.sh|*.c|*.cpp) bat "$1";;
 			*) cat "$1";
 		esac;
 	}
