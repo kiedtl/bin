@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# show - show windows that have been in dwm
+# this is a component of rcmen.
+# (c) Kied Llaentenn (@kiedtl)
+# See the LICENSE for more information.
+
+main() {
+	# get listing of all hidden windows
+	w_id=$(ndmen /tmp/dwm_info/hidden cat)
+	
+	# show window
+	xdotool windowmap ${w_id}
+}
+
+main "$@"
+

@@ -57,7 +57,7 @@ spawn() {
     eval $(xdotool getmouselocation --shell)
     9menu -bg $(cat /tmp/info/dwm/colors/normbg) -fg $(cat /tmp/info/dwm/colors/normfg) \
           -geometry 100x100+${X}+${Y} -popup                                            \
-          'New:echo new' 'Resize:echo resize' 'Delete: echo delete' 'Hide: echo hide' 'Cancel: exit'
+          'new:echo new' 'resize:echo resize' 'delete: echo delete' 'hide: echo hide' 'show:echo show' 'cancel: exit'
 }
 
 $(spawn)
