@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# show - show windows that have been in dwm
+# show - show windows that have been hidden in dwm
 # this is a component of rcmen.
 # (c) Kied Llaentenn (@kiedtl)
 # See the LICENSE for more information.
@@ -11,6 +11,10 @@ main() {
 	
 	# show window
 	xdotool windowmap ${w_id}
+	
+	# update hidden files cache
+	echo "debug: window_id: ${w_id}"
+	cat /tmp/dwm_info/hidden | grep -v "${w_id}" > /tmp/dwm_info/hidden
 }
 
 main "$@"
