@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 #
-# fet - clear the screen, show pfetch, and run 16. 
+# fet - clear the screen, show fetch, and run 16. 
 # (c) Kied Llaentenn (@kiedtl)
 
 main() {
-	cls || exit 1
-	kfetch || exit 2
+	clear || exit 1
+	rsfetch -hl || exit 2
 	16 || exit 3
 }
 
