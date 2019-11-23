@@ -30,7 +30,7 @@ resize() {
 }
 
 new() {
-    # buggy. st launches with a height
+    # buggy. st/xterm launches with a height
     # smaller than expected.
     # TODO: fix this.
     fw=8
@@ -45,7 +45,7 @@ new() {
     w=$(( ( W - (ib + ob)*2 ) / fw ))
     h=$(( ( H - (ib + ob)*2 ) / fh )) 
     
-    st -t terminal -g "${w}x${h}+${X}+${Y}"
+    xterm -title terminal -geometry "${w}x${h}+${X}+${Y}"
 }
 
 delete() {
