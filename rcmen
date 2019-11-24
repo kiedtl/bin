@@ -30,13 +30,10 @@ resize() {
 }
 
 new() {
-    # buggy. st/xterm launches with a height
-    # smaller than expected.
-    # TODO: fix this.
-    fw=8
-    fh=19
-    ib=2
-    ob=8
+    fw=5	# width of term font
+    fh=11	# height of term font
+    ib=12	# size of term inner border
+    ob=4	# size of term windows WM border
 
     #eval $(crud)
     #tabbed -n st -cg "${G}" -r 2 st -w '' -t terminal
@@ -66,7 +63,7 @@ scratchpad() {
 
 spawn() {
     eval $(xdotool getmouselocation --shell)
-    9menu -bg $(cat /tmp/info/dwm/colors/normbg) -fg $(cat /tmp/info/dwm/colors/normfg) \
+    9menu -font "Fixed" \
           -geometry 100x100+${X}+${Y} -popup                                            \
           'new:echo new' 'launch: echo ndmen' 'resize:echo resize' 'delete: echo delete' 'hide: echo hide' 'show:echo show' 'lock: echo slock'
 }
