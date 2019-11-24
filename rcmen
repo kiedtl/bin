@@ -63,8 +63,7 @@ scratchpad() {
 
 spawn() {
     eval $(xdotool getmouselocation --shell)
-    9menu -font "Fixed" \
-          -geometry 100x100+${X}+${Y} -popup                                            \
+    9menu -geometry 100x100+${X}+${Y} -popup                                            \
           'new:echo new' 'launch: echo ndmen' 'resize:echo resize' 'delete: echo delete' 'hide: echo hide' 'show:echo show' 'lock: echo slock'
 }
 
