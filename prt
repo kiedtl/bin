@@ -4,7 +4,7 @@
 # (c) Kied Llaentenn (@kiedtl):
 
 main() {
-	netstat -tulpn | grep LISTEN
+	ss -tulpn | grep LISTEN
 }
 
 main "$@"

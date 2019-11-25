@@ -12,6 +12,6 @@
 set -- `xrectsel '%x %y %w %h'`
 
 ffmpeg -y -f x11grab -s ${3}x${4} \
-       -r 30 -i :1.0+${1},${2}    \
-       -pix_fmt yuv420p -qscale 0 \
+       -r 30 -i ${DISPLAY:=:0.0}+${1},${2}    \
+       -vcodec libx264 \
        ${video_path}.mp4
