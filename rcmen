@@ -56,15 +56,22 @@ hide() {
     [ ${?} -eq 0 ] && echo ${id} >> /tmp/dwm_info/hidden
 }
 
-scratchpad() {
-	w_id=$(xdotool search --name scratchpad)
-	xdotool windowmap ${w_id}
+snarf() { xsel -o | xsel -bi; }
+
+plumb() {
+	clip=$(xsel -bo)
+	url_rgx='(https?|ftp|file)://[-A-Za-z0-9\+&@#/%$=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]'
+	if [[ $clip =~ $url_rgx ]]; then netsurf $clip; fi
+	case $clip in
+		*.pdf) mupdf $clip ;;
+		*) sam $clip ;;
+	esac
 }
 
 spawn() {
     eval $(xdotool getmouselocation --shell)
     9menu -geometry 100x100+${X}+${Y} -popup                                            \
-          'new:echo new' 'launch: echo ndmen' 'resize:echo resize' 'delete: echo delete' 'hide: echo hide' 'show:echo show' 'lock: echo slock'
+          'new:echo new' 'delete: echo delete' 'resize: echo resize' 'hide: echo hide' 'show:echo show' 'snarf: echo snarf' 'plumb: echo plumb'
 }
 
 $(spawn)
