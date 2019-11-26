@@ -1,0 +1,19 @@
+#!/bin/bash
+#
+# rp - recursively get paths in pure shell
+# from StackOverflow
+
+main() {
+	d=${1:-.}
+	cd $d
+	for f in ./*; do
+		[ -f "$f" ] && echo "$f"
+		[ -d "$f" ] && {
+			cd "$f";
+			main "$f";
+		}
+	done
+}
+
+main "$@"
+
