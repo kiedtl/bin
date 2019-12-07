@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # ndmen: dmenu wrapper with better defaults
-# usage: ndmen [FILE] [SHELL]
+# usage: ndmen [FILE] [SHELL] [W] [H] [X] [Y]
 # 	FILE default: dmenu_path
 #	SHELL default: /bin/sh
 #	example:
@@ -23,4 +23,4 @@ shift 2
 [ -z "$2" ] && s="${SHELL:-"/bin/sh"}" \
 	|| s="cat"
 
-${p} | /sbin/dmenu -nb "#fff" -nf "#000" -sb "#000" -sf "#fff" -p ' > ' -fn 'Fixed:size=12' -l "$h" -x "$x" -y "$y" -wi "$w" | "${s}" &
+${p} | /sbin/dmenu -nb "#fff" -nf "#000" -sb "#000" -sf "#fff" -p ' > ' -fn 'Fixed:size=12' -l "${4:-$h}" -x "${5:-$x}" -y "${6:-$y}" -wi "${3:-$w}" | "${s}" &

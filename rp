@@ -4,16 +4,14 @@
 # from StackOverflow
 
 main() {
-	d=${1:-.}
-	cd $d
-	for f in ./*; do
+	d=${1}
+	for f in "${prefix}/${d}/"*; do
 		[ -f "$f" ] && echo "$f"
 		[ -d "$f" ] && {
-			cd "$f";
-			main "$f";
+			( cd "$f"; main "$f" "${prefix}/${f}"; );
 		}
 	done
 }
 
-main "$@"
+main "$1" "./"
 
