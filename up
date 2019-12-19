@@ -1,0 +1,31 @@
+#!/bin/sh
+#
+# up - text/file upload
+# (c) Kied Llaentenn (@kiedtl)
+# See the LICENSE for more information.
+
+usage() {
+		echo "up - text/file upload
+(c) Kied Llaentenn
+
+USAGE:
+		$ up [f|t|i|h] [args]
+
+OPTIONS:
+		f	[file]	post file to 0x0.st
+		t	[file]	post text from file to ix.io
+		i			post text from stdin to ix.io
+"
+}
+
+main() {
+	case "$1" in
+		f*) curl -F"file=@${2}" 0x0.st -i;; # post file
+		t*) cat "$2" | curl -iF 'f:1=<-' ix.io ;; # post text from file
+		i*) read text; echo "$text" | curl -iF 'f:1=<-' ix.io ;; # stdin
+		 *) usage ;;
+	esac
+}
+
+main "$@"
+

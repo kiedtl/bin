@@ -1,12 +1,10 @@
-#!/usr/bin/env bash
+#!/bin/sh
 #
-# fet - clear the screen, show fetch, and run 16. 
+# fet - rsfetch
 # (c) Kied Llaentenn (@kiedtl)
 
 main() {
-	clear || exit 1
-	rsfetch -hl || exit 2
-	16 || exit 3
+	rsfetch $@ -hl || exit 1
 }
 
 main "$@"
