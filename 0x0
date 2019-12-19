@@ -1,8 +1,0 @@
-#!/bin/bash
-#
-# 0x0: simple pastebin
-# (c) Dylan Araps
-
-[ $# -eq 0 ] && read inp && set $inp
-[ -f "$1" ] && p=cat || p=echo
-$p "$*" | curl -sF 'f:1=<-' http://0x0.st

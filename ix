@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# ix - ix.io pastebin
+# (c) Kied Llaentenn (@kiedtl)
+# See the LICENSE for more information.
+
+main() {
+	case "$1" in
+		f*) ;; # post file
+		t*) cat "$2" | curl -nF 'f:1=<-' ix.io ;; # post text from file
+		i*) ;; # post text from stdin
+		 *) ;;
+	esac
+}
+
+main "$@"
+

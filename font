@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# font - display characters
+# (c) Kied Llaentenn (@kiedtl)
+# See the LICENSE for more information.
+
+main() {
+	printf "abcdefghijklmnopqrstuvwxyz\n"
+	printf "ABCDEFGHIJKLMNOPQRSTUVWXYZ\n"
+	printf "1234567890!@#$%%^&*()[]|{};\n"
+	printf ":''""``<>,.?/\~\n"
+	printf "±²³´µ¶·¸¹°¡À£¤¥Þ¦ª¨©\n"
+	printf "\nThe quick brown fox jumped\nover the lazy dog.\n"
+}
+
+main "$@"
+
