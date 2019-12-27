@@ -4,7 +4,7 @@
 # (c) Kied Llaentenn (@kiedtl)
 
 main() {
-	rsfetch $@ -hl || exit 1
+	rsfetch -deskuUH@Nlc || exit 1
 }
 
 main "$@"

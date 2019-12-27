@@ -10,14 +10,14 @@ c() {
 	[ -f "$1" ] && {
 		case "$1" in
 			*.txt) cat "$1";;
-			*.rs|*.md|*.sh|*.c|*.cpp) bat "$1";;
+			*.rs|*.md|*.sh|*.h|*.c|*.cpp) bat "$1";;
 			*) cat "$1";
 		esac;
 	}
 	[ -d "$1" ] && {
-		cd "$1"
+		[ "${PWD}" -ef "${HOME}" ] ||
+			fdb -a "${PWD}";
+		cd "$1";
 	}
 	[ -z "$1" ] && { clear; }
-
-	#printf "\033[1mERROR: \033[0m%s\n" "Invalid arguments."
 }
