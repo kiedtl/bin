@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# z - jump to directories via fdb
+# 
+# NOTE: this isn't an actual script; it
+# must be sourced in the ~/.${SHELL}rc to work.
+# 
+# (c) Kied Llaentenn (@kiedtl)
+# See the LICENSE for more information.
+
+z() {
+	local dir=$(fdb -q "$@" | head -n 1)
+	[ -z "${dir}" ] && return 1
+	cd "${dir}" || fdb -d "${dir}"
+}
