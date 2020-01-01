@@ -5,5 +5,6 @@
 # and must be sourced in shell profile.
 
 h() {
+	echo -en "\033]0;${HOME}\007"
 	cd "${HOME}"
 }

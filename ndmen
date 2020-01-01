@@ -23,6 +23,4 @@ shift 2
 [ -z "$2" ] && s="${SHELL:-"/bin/sh"}" \
 	|| s="cat"
 
-${p} | /sbin/dmenu -nb "#0c0f15" -nf "#cfd3d9" -sb "#5f728c" -sf "#0c0f15" -p ' > ' -fn 'ttyp0:size=12' -l "${4:-$h}" -x "${5:-$x}" -y "${6:-$y}" -wi "${3:-$w}" | "${s}" &
-
-# 0C0F15 80797E 3C5783 5F728C 77889B 74B7C6 97A2AE cfd3d9 cfd3d9 80797E 3C5783 5F728C 77889B 74B7C6 97A2AE cfd3d9
+${p} | /sbin/dmenu -nb "#0f0d12" -nf "#dfdacb" -sb "#788462" -sf "#0f0d12" -p ' > ' -fn 'ttyp0:size=12' -l "${4:-$h}" -x "${5:-$x}" -y "${6:-$y}" -wi "${3:-$w}" | "${s}" &

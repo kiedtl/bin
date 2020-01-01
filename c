@@ -18,6 +18,7 @@ c() {
 		[ "${PWD}" -ef "${HOME}" ] ||
 			fdb -a "${PWD}";
 		cd "$1";
+		echo -ne "\033]0;${PWD}\007"
 	}
 	[ -z "$1" ] && { clear; }
 }
