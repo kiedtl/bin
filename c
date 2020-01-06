@@ -18,7 +18,9 @@ c() {
 		[ "${PWD}" -ef "${HOME}" ] ||
 			fdb -a "${PWD}";
 		cd "$1";
-		echo -ne "\033]0;${PWD}\007"
+		ppwd="${PWD}"
+		newpwd=$(echo "${ppwd}" | sed -e "s/\/home\/kiedtl/~/")
+		echo -ne "\033]0;${newpwd}\007"
 	}
 	[ -z "$1" ] && { clear; }
 }

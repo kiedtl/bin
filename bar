@@ -1,18 +1,15 @@
-#!/usr/bin/env bash
+#!/bin/sh
 #
-# bar - simple bar script based on polybar>lemonbar
-# You can retrieve the polybar config from the following location:
-# https://github.com/kiedtl/dotfiles
+# bar - get various bar info for polybar
 # (c) Kied Llaentenn
 
 main() {
-	. ${HOME}/.cache/wal/colors.sh
-	~/.config/polybar/launch-dwm.sh | lemonbar \
-		-g 1896x24+12+1048 \
-		-f "Siji:size=9" -f "Terminus:size=9" \
-		-n bar \
-		-pdb  -u 3 \
-		-B $color0 -F $color7 # accent color: $color6
+	mode=$(cat /tmp/dwm_info/current_layout)
+	case $mode in
+		"0") echo "[]=" ;;
+		"1") echo "><>" ;;
+		"2") echo "[M]" ;;
+	esac
 }
 
 main "$@"
