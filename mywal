@@ -1,0 +1,23 @@
+#!/bin/sh
+#
+# wal - my version of Dylan's wal script :P
+# (c) Kied Llaentenn (@kiedtl)
+# See the LICENSE for more information.
+
+main() {
+	[ ! -f "${1}" ] && {
+		printf "err: '${1}' doesn't exist.\n";
+		exit 1;
+	}
+
+	#convert "${1}" -resize 25% -unique-colors -colors 16 txt:-
+	data=$(convert "${1}" -unique-colors -depth 8 -scale 500x500! -colors 8 -format "%c" histogram:info: |\
+		sed -n 's/^[ ]*\(.*\):.*[#]\([0-9a-fA-F]*\) .*$/\1,#\2/p' | sort -r -n -k 1 -t ",")
+	echo "${data}" | while IFS="\n" read item; do
+		echo "${item}" | while IFS=',' read _ color; do
+			echo "${color}" | sed -e 's/#//'
+		done
+	done
+}
+
+main "$@"
