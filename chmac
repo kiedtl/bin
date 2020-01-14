@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 #
-# chmac - Change the MAC address temporarily. Must be run as sudo!
+# chmac - Change the MAC address temporarily.
+# Must be run as root!
 # (c) Kied Llaentenn (@kiedtl)
 
 main() {
-	ifconfig wlan0 down hw ether $1
-	ifconfig wlan0 up
+	ip l set wlan0 down
+	ip l set wlan0 address "${1}"
+	#ifconfig wlan0 down hw ether $1
+	ip l set wlan0 up
 	wfi
-	# systemctl restart netctl-auto@wlp2s0
 }
 
 main "$@"
