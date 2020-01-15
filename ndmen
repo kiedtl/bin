@@ -23,4 +23,4 @@ shift 2
 [ -z "$2" ] && s="${SHELL:-"/bin/sh"}" \
 	|| s="cat"
 
-${p} | /sbin/dmenu -nb "#0c0c0c" -nf "#e0dfdd" -sb "#82817e" -sf "#0c0c0c" -p ' > ' -fn 'ttyp0:size=12' -l "${4:-$h}" -x "${5:-$x}" -y "${6:-$y}" -wi "${3:-$w}" | "${s}" &
+${p} | /sbin/dmenu -nb "#151312" -nf "#effeff" -sb "#5da893" -sf "#151312" -p ' > ' -fn 'ttyp0:size=12' -l "${4:-$h}" -x "${5:-$x}" -y "${6:-$y}" -wi "${3:-$w}" | "${s}" &
