@@ -6,6 +6,8 @@
 
 main() {
 	xbps-remove -Oo
+
+	rm -rf /var/cache/xbps/*
 }
 
 main "$@"
