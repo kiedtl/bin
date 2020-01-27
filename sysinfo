@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# fet - rsfetch
+# sysinfo - rsfetch wrapper
 # (c) Kied Llaentenn (@kiedtl)
 
 main() {
