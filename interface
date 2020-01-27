@@ -1,19 +1,20 @@
 #!/bin/sh
 #
-# http://github.com/mitchweaver/bin
+# interface: get network interface
+# (c) Kiëd Llaentenn
+# originally from http://github.com/mitchweaver/bin
 #
-# get network interface
-#
-# (wifi preferred, if no wifi interface 
+# (wifi preferred, if no wifi interface
 #  is found try to use ethernet)
 #
 
 for dev in wl eth enp ; do
-    set -- "$(ifconfig -a | grep $dev)"
+    set -- "$(ip l | grep $dev)"
     [ "$1" ] && break
 done
 
 echo "$*" | \
     sed 's/Link//' | \
-    awk '{print $1}' | \
+    awk '{print $2}' | \
+    sed 's/://' | \
     head -n 1

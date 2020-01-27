@@ -5,7 +5,7 @@
 # sudo wpa_passphrase NETWORK P@S$W0rD1234 | sudo tee /etc/wpa_supplicant.conf
 # by Kied Llaentenn (@kiedtl)
 
-INTERFACE=wlan0
+INTERFACE=$(interface)
 
 main() {
 	sudo killall wpa_supplicant; sudo killall dhcpcd
