@@ -2,10 +2,23 @@
 #
 # fetch - rsfetch wrapper
 # (c) Kiëd Llaentenn
-# see the LICENSE for more information.
 
-reset=$(printf "\033[0m")
-bold=$(printf "\033[1m")
+# color escapes
+BLK="$(printf "\033[30m")"
+RED="$(printf "\033[31m")"
+GRN="$(printf "\033[32m")"
+YLW="$(printf "\033[33m")"
+BLU="$(printf "\033[34m")"
+PUR="$(printf "\033[35m")"
+CYN="$(printf "\033[36m")"
+WHT="$(printf "\033[37m")"
+RST="$(printf "\033[0m")"
+
+# build the color bars
+BAR="━━━━"
+LEN=6
+OUTT="$RED$BAR$GRN$BAR$YLW$BAR$BLU$BAR$PUR$BAR$CYN$BAR$RST"
+
 data=
 
 while IFS="\n" read -r info; do
@@ -17,8 +30,10 @@ EOF
 set -- ${data}
 
 echo "
-${bold} |\___/|   os ${reset}> ${1}
-${bold} /     \   ke ${reset}> ${2}
-${bold}/__^ ^__\  ed ${reset}> ${3}
-${bold}   \o/     sh ${reset}> ${4}
+${OUTT}
+${BLU}os             ${RST}${1}
+${BLU}kernel         ${RST}${2}
+${BLU}packages       ${RST}${3}
+${BLU}shell          ${RST}${4}
+${OUTT}
 "
