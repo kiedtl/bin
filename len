@@ -7,12 +7,7 @@
 [ "$1" ] || exit 1
 
 main() {
-	lines=1
-	while IFS='\n' read -r _
-	do
-		lines=$((lines + 1))
-	done < "$@"
-	printf "%s\n" "${lines}"
+	cat "${1}" | wc -l
 }
 
 main "$@"
