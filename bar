@@ -1,9 +1,9 @@
 #!/bin/sh
 #
-# bar - get various bar info for polybar
+# bar - start bars
 # (c) Kied Llaentenn
 
-main() {
+get_dwminfo() {
 	mode=$(cat /tmp/dwm_info/current_layout)
 	case $mode in
 		"0") echo "[]=" ;;
@@ -12,6 +12,13 @@ main() {
 		"3") echo "(@)" ;;
 		"4") echo "[\]" ;;
 	esac
+}
+
+main() {
+	killall polybar
+	polybar left &
+	polybar center &
+	exec polybar right
 }
 
 main "$@"

@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+# rice - restore previous rice
+# (c) Kied Llaentenn (@kiedtl)
+# See the LICENSE for more information.
+
+main() {
+	# merge Xresources
+	xrdb -merge ~/etc/Xorg/.Xresources
+
+	# merge pywal's Xresources
+	xrdb -merge ~/.cache/wal/colors.Xresources
+
+	# set wallpaper
+	[ -f ~/.fehbg ] && ~/.fehbg &
+
+	# start bars
+	bar &
+}
+
+main "$@"
+
