@@ -10,6 +10,8 @@
 # (c) Kied Llaentenn
 # see the LICENSE for more info.
 
+. ~/.cache/wal/colors.sh
+
 set -- $(dimensions) "$@"
 w=$(echo "$1 / 1.75" | bc)
 x=$(( $1 / 2 - $w / 2 ))
@@ -23,4 +25,4 @@ shift 2
 [ -z "$2" ] && s="${SHELL:-"/bin/sh"}" \
 	|| s="cat"
 
-${p} | /sbin/dmenu -nb "#151312" -nf "#effeff" -sb "#5da893" -sf "#151312" -p ' > ' -fn 'ttyp0:size=12' -l "${4:-$h}" -x "${5:-$x}" -y "${6:-$y}" -wi "${3:-$w}" | "${s}" &
+${p} | /sbin/dmenu -nb "$color0" -nf "$color7" -sb "$color1" -sf "$color7" -p ' > ' -fn 'ttyp0:size=12' -l "${4:-$h}" -x "${5:-$x}" -y "${6:-$y}" -wi "${3:-$w}" | "${s}" &
