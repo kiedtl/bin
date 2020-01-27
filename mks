@@ -9,7 +9,7 @@ echo "\
 #!/bin/sh
 #
 # $1 - $2
-# (c) Kied Llaentenn (@kiedtl)
+# (c) Kiëd Llaentenn (@kiedtl)
 # See the LICENSE for more information.
 
 main() {
