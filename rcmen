@@ -9,11 +9,7 @@
 #	- changed crud to xrectsel
 # NOTE: requires bash due to use of arrays.
 
-BPX=4
-BCOL="#fff"
-
-#read -r BPX < /tmp/info/dwm/borders/size
-#read -r BCOL < /tmp/info/dwm/borders/selcol
+. ~/.cache/wal/colors.sh
 
 get_id_interactive() {
     xid=`xwininfo | grep 'Window id: '`
@@ -27,6 +23,13 @@ resize() {
 
     xdotool windowsize ${id} ${W} ${H}
     xdotool windowmove ${id} ${X} ${Y}
+}
+
+move() {
+	id=$(get_id_interactive)
+	read -r W H X Y <<< $(xrectsel '%w %h %x %y')
+
+	xdotool windowmove ${id} ${X} ${Y}
 }
 
 new() {
@@ -47,28 +50,11 @@ delete() {
     xdotool windowclose ${id}
 }
 
-hide() {
-    id=`get_id_interactive`
-    xdotool windowunmap ${id}
-    [ ${?} -eq 0 ] && echo ${id} >> /tmp/dwm_info/hidden
-}
-
-snarf() { xsel -o | xsel -bi; }
-
-plumb() {
-	clip=$(xsel -bo)
-	url_rgx='(https?|ftp|file)://[-A-Za-z0-9\+&@#/%$=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]'
-	if [[ $clip =~ $url_rgx ]]; then netsurf $clip; fi
-	case $clip in
-		*.pdf) mupdf $clip ;;
-		*) sam $clip ;;
-	esac
-}
-
 spawn() {
     eval $(xdotool getmouselocation --shell)
-    9menu -geometry 100x100+${X}+${Y} -popup                                            \
-          'new:echo new' 'delete: echo delete' 'resize: echo resize' 'hide: echo hide' 'show:echo show' 'snarf: echo snarf' 'plumb: echo plumb'
+    9menu -geometry 100x100+${X}+${Y} -popup \
+	  -bg "$color7" -fg "$color0" \
+          'new: echo new' 'delete: echo delete' 'move: echo move' 'resize: echo resize'
 }
 
 $(spawn)
