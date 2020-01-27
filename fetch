@@ -24,16 +24,16 @@ data=
 while IFS="\n" read -r info; do
 	data="${data} $info"
 done <<EOF
-$(rsfetch -deskM)
+$(rsfetch -dskMp xbps)
 EOF
 
 set -- ${data}
 
 echo "
 ${OUTT}
-${BLU}os             ${RST}${1}
+${BLU}os                  ${RST}${1}
 ${BLU}kernel         ${RST}${2}
-${BLU}packages       ${RST}${3}
-${BLU}shell          ${RST}${4}
+${BLU}packages             ${RST}${4}
+${BLU}shell              ${RST}${3}
 ${OUTT}
 "
