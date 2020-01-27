@@ -5,10 +5,13 @@
 # (c) Kied Llaentenn (@kiedtl)
 
 main() {
-	ip l set wlan0 down
-	ip l set wlan0 address "${1}"
+	inter=$(interface)
+
+	ip l set "${inter}" down
+	ip l set "${inter}" address "${1}"
+
 	#ifconfig wlan0 down hw ether $1
-	ip l set wlan0 up
+	ip l set "${inter}" up
 	wfi
 }
 
