@@ -1,7 +1,7 @@
 #!/bin/sh
 #
-# bar - start bars
-# (c) Kied Llaentenn
+# bar - the holy polybar
+# (c) Kiëd Llaentenn
 
 get_dwminfo() {
 	mode=$(cat /tmp/dwm_info/current_layout)
@@ -16,9 +16,7 @@ get_dwminfo() {
 
 main() {
 	killall polybar
-	polybar left &
-	polybar center &
-	exec polybar right
+	exec polybar bar
 }
 
 main "$@"
