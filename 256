@@ -1,12 +1,17 @@
-#!/usr/bin/env bash
-#
-# The bestest and fasterest 256 color script.
-#
-# Usage: 256 end_col ('256 16', '256 256' or '256')
-# stolen from Dylan Araps, the King of Shell.
+#!/usr/bin/csi -s
+;
+; 256 -- print colors in the 256 palette
+; implemented in Scheme
+; (c) Kiëd Llaentenn
+; See the LICENSE for more information
 
-for ((i=0;i<${1:-256};i++)) {
-    printf '%s\e[4D\e[4C\e[48;5;%sm\e[K\e[m\n' "$i" "$i"
-}
+(define e #\x1B)
+(define (tostr i) (number->string i))
 
-# todo: rewrite this thing in Rust or C, or whatever language I want to learn next
+(define (colors i)
+  (display
+    (string-append (tostr i) "\u001B[4D\u001B[4C\u001B[48;5;"
+                   (tostr i) "m\u001B[K\u001B[m\n"))
+  (if (< i 255) (colors (+ 1 i))))
+
+(colors 0)
