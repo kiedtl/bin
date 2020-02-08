@@ -1,0 +1,99 @@
+#!/usr/bin/env bash
+#by necro
+e="\e[0m"
+bk="\e[38;2;1;1;1m"
+bl="\e[48;2;101;166;232m"
+wh="\e[48;2;251;253;252m"
+pi="\e[48;2;229;139;121m"
+while true; do
+clear
+echo -e "
+              $bk██████████          $bk████$e
+          $bk████$wh          ████$e$bk    ██$bl    ██$e
+        $bk██$wh                  ██████$bl    $bk██$e
+      $bk██$pi          $wh            ██$e$bk  ████$e
+      $bk██$pi    ██      $wh          ██$e
+      $bk██$pi    ██      $wh          ██$e
+      $bk██$pi    ██      $wh          ██$e
+      $bk██$pi          $wh            ██$e
+        $bk████$wh      ██        ██$e
+          $bk████████$wh  ████████$e
+        $bk██$bl    ██$wh      ██$bl  ██$e
+        $bk██$bl    ██$wh      ██$bl  ██$e
+        $bk██$wh    ██$bl      ██████$e
+        $bk██$bl    ██$bl      ██$bl  ██$e
+          $bk████████████████$e
+            $bk██$wh          ██$e
+            $bk██████████████$e
+          $bk██$bl            ██$e
+          $bk████████████████$e"
+sleep 0.1
+clear
+echo -e "
+                $bk██████████      ████$e
+            $bk████$wh          ██████$bl    ██$e
+          $bk██$wh                  ██$bl    ██$e
+        $bk██$pi              $wh        ████$e
+        $bk████$pi    ██        $wh      ██$e
+        $bk████$pi    ██        $wh      ██$e
+        $bk████$pi    ██        $wh      ██$e
+        $bk██$pi              $wh        ██$e
+          $bk████$wh    ████        ██$e
+        $bk██$bl    ████$wh    ██████████$e
+        $bk██$bl  ██$wh        ██$bl    ██$wh  ██$e
+        $bk████$wh          ██$bl    ██$wh    ██$e
+          $bk████$wh      ████████████████$e
+          $bk██$bl  ██████        ████$bl  ██$e
+      $bk████$wh    $bl          $wh    ██████$e
+    $bk██$bl    ██$wh      ████        ██$e
+      $bk██$bl    ████████$e$bk  ██$wh    ██$bl  ██$e
+        $bk████            ████$bl    ██$e
+                        $bk██$bl    ██$e
+                          $bk████$e"
+sleep 0.3
+clear
+echo -e "
+              $bk██████████          $bk████$e
+          $bk████$wh          ████$e$bk    ██$bl    ██$e
+        $bk██$wh                  ██████$bl    $bk██$e
+      $bk██$pi          $wh            ██$e$bk  ████$e
+      $bk██$pi    ██      $wh          ██$e
+      $bk██$pi    ██      $wh          ██$e
+      $bk██$pi    ██      $wh          ██$e
+      $bk██$pi          $wh            ██$e
+        $bk████$wh      ██        ██$e
+          $bk████████$wh  ████████$e
+        $bk██$bl    ██$wh      ██$bl  ██$e
+        $bk██$bl    ██$wh      ██$bl  ██$e
+        $bk██$wh    ██$bl      ██████$e
+        $bk██$bl    ██$bl      ██$bl  ██$e
+          $bk████████████████$e
+            $bk██$wh          ██$e
+            $bk██████████████$e
+          $bk██$bl            ██$e
+          $bk████████████████$e"
+sleep 0.1
+clear
+echo -e "
+              $bk██████████        ████
+          $bk████$wh          ████$e  $bk██$bl    ██$e
+        $bk██$wh                  ████$bl    ██$e
+      $bk██$pi      $wh            ██████████$e
+      $bk██$pi  ██    $wh              ██$e
+      $bk██$pi  ██    $wh              ██$e
+      $bk██$pi  ██    $wh              ██$e
+      $bk██$pi      $wh                ██$e
+    $bk████████$wh      ██████    ██$e
+  $bk██$bl    ██████████$wh      ████$e
+  $bk██$bl  ████      ██$wh        ██$e
+    $bk██$wh  ██$bl        ██$wh      ████$e
+    $bk██$wh  ██     ███████  ██$bl  ██$e
+      $bk████$bl            ██    ██$e
+        $bk████$bl            ████$e
+    $bk██████$wh      $bl  ██████$wh  ████$e
+  $bk██$bl    ██$wh  ██$e$bk      ██$wh    ██$bl  ██$e
+    $bk██$bl    ██$e$bk          ████$bl    ██$e
+      $bk████$e$bk            ██$bl    ██$e
+                        $bk████"
+sleep 0.3
+done
