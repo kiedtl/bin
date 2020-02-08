@@ -12,12 +12,12 @@
 
 . ~/.cache/wal/colors.sh
 
-set -- $(dimensions) "$@"
-w=$(echo "$1 / 1.75" | bc)
-x=$(( $1 / 2 - $w / 2 ))
-y=$(( $2 / 5 ))
-h=$(( $2 / 50 ))
-shift 2
+#set -- $(dimensions) "$@"
+#w=$(echo "$1 / 1.75" | bc)
+#x=$(( $1 / 2 - $w / 2 ))
+#y=$(( $2 / 5 ))
+#h=$(( $2 / 50 ))
+#shift 2
 
 [ -z "$1" ] && p="/sbin/dmenu_path"
 [ -f "$1" ] && p="cat $1"
