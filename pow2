@@ -1,0 +1,19 @@
+#!/bin/csi -s
+#!
+#! pow2 - list powers of 2
+#! (c) Kied Llaentenn (@kiedtl)
+#! See the LICENSE for more information.
+
+(import (chicken process-context))
+(define (tostr i) (number->string i))
+(define (toint s) (string->number s))
+
+(define (pow2 i cont)
+  (display (string-append "2^" (tostr i) ": "
+    (tostr (expt 2 i))))
+  (newline)
+  (if cont (pow2 (+ i 1))))
+
+(if (null? (command-line-arguments))
+  (pow2 1 #t)
+  (pow2 (toint (car (command-line-arguments))) #f))
