@@ -1,11 +1,11 @@
-#!/bin/sh
-#
-# font - display characters
-# (c) Kied Llaentenn (@kiedtl)
-# See the LICENSE for more information.
+#!/bin/csi -s
+;
+; font - display characters
+; (c) Kied Llaentenn (@kiedtl)
+; See the LICENSE for more information.
 
-main() {
-        echo "
+(begin
+  (display "
 	A B C D E F G H I J K L M 
         N O P Q R S T U V W X Y Z
 
@@ -16,9 +16,5 @@ main() {
 
         () [] {} <> ? / \\ : \" ' ;
         ! @ # $ % ^ & * _ = + - |
-                   \` ~
-"
-}
-
-main "$@"
-
+                   ` ~")
+  (newline))
