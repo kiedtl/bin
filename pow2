@@ -5,15 +5,14 @@
 #! See the LICENSE for more information.
 
 (import (chicken process-context))
-(define (tostr i) (number->string i))
-(define (toint s) (string->number s))
 
-(define (pow2 i cont)
-  (display (string-append "2^" (tostr i) ": "
-    (tostr (expt 2 i))))
-  (newline)
-  (if cont (pow2 (+ i 1))))
+(define (pow2 i to)
+    (display (string-append "2^" (number->string i) ": "
+        (number->string (expt 2 i))))
+    (newline)
+    (if (< i to) (pow2 (+ i 1) to)))
 
 (if (null? (command-line-arguments))
-  (pow2 1 #t)
-  (pow2 (toint (car (command-line-arguments))) #f))
+    (pow2 1 10000)
+    (pow2 1 (string->number
+        (car (command-line-arguments)))))
