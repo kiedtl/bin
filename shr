@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# shr - ¯\_(ツ)_/¯
+# (c) Kiëd Llaentenn (@kiedtl)
+# See the LICENSE for more information.
+
+echo "¯\_(ツ)_/¯" | xclip -selection clipboard
