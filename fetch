@@ -24,16 +24,20 @@ data=
 while IFS="\n" read -r info; do
 	data="${data} $info"
 done <<EOF
-$(rsfetch -dskMp xbps)
+$(rsfetch -dskM)
 EOF
+
+if command -v kiss >/dev/null 2>&1 ; then
+    pkgs=$(kiss l | wc -l)
+fi
 
 set -- ${data}
 
 echo "
 ${OUTT}
-${BLU}os                  ${RST}${1}
-${BLU}kernel         ${RST}${2}
-${BLU}packages             ${RST}${4}
-${BLU}shell              ${RST}${3}
+${BLU}os                  ${RST}KISS
+${BLU}editor            ${RST}neovim
+${BLU}packages             ${RST}${pkgs}
+${BLU}shell            ${RST}Z Shell
 ${OUTT}
 "
