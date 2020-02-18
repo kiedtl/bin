@@ -1,20 +1,18 @@
-#!/usr/bin/env bash
-#
-# Create a bash script using a template.
-# partly stolen from Dylan Arap's dotfiles.
-
-[[ $1 ]] || exit
-
-echo "\
 #!/bin/sh
 #
-# $1 - $2
-# (c) Kiëd Llaentenn (@kiedtl)
-# See the LICENSE for more information.
+# mks - create a bash script using a template.
+# partly stolen from Dylan Arap's dotfiles.
 
-main() {
+[ -z "$1" ] && exit
 
-}
+echo "#!/bin/sh
+#" > "$1"
 
-main \"\$@\"
-" > "$1" && chmod +x "$1"
+[ -z "$2" ] || echo "# $1 - $2" >> "$1"
+
+echo "# (c) Kiëd Llaentenn <kiedtl@protonmail.com>
+# See the LICENSE for copyright information.
+
+" >> "$1"
+
+chmod +x "$1"
