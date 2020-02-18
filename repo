@@ -1,0 +1,14 @@
+#!/bin/sh
+#
+# repo - list outdated package that I maintain
+# (c) Kiëd Llaentenn (@kiedtl)
+# See the LICENSE for more information.
+
+main() {
+    curl -s "https://repology.org/maintainer/kiedtl%40protonmail.com/feed-for-repo/kiss_community/atom" | \
+        grep outdated | \
+        sed 's|<title||;s|</title>||'
+}
+
+main "$@"
+
