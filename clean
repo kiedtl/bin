@@ -4,11 +4,7 @@
 # (c) Kied Llaentenn (@kiedtl)
 # See the LICENSE for more information.
 
-main() {
-	xbps-remove -Oo
-
-	rm -rf /var/cache/xbps/*
-}
-
-main "$@"
-
+if command -v xbps-remove >/dev/null 2>&1; then
+    xbps-remove -o
+    rm -rf /var/cache/xbps/*
+fi
