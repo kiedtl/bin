@@ -1,14 +1,17 @@
 #!/bin/sh
 #
-# v - open file in editor.
+# ed - open file in editor.
 # (c) Kied Llaentenn (@kiedtl)
 # See the LICENSE for more information.
 
-main() {
-	[ -f "$1" ] && {
-		nvim "$1";
-	}
+[ ! -f "$1" ] && {
+    printf "ed: \"${1}\" doesn't exist -- create? [nY] ";
+    read ans;
+
+    case "$ans" in
+        [Yy]*) touch "$1" ;;
+        *) ;;
+    esac
 }
 
-main "$@"
-
+[ -f "$1" ] && nvim "$1"
