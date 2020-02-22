@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# own - take ownership of directory
+# (c) Kiëd Llaentenn <kiedtl@protonmail.com>
+# See the LICENSE for copyright information.
+
+for file in $(file ${1:-.})
+do
+    chown kiedtl "${file}"
+done
