@@ -1,0 +1,37 @@
+#!/bin/sh
+#
+# lbar: lemonbar script
+# credits: u/z-brah
+
+bg=$(xrdb -query | grep "*.foreground" | awk '{ print $2 }') #00ffffff
+fg=$(xrdb -query | grep "*.background" | awk '{ print $2 }') #ff666b7d
+
+tfg1="${bg}"
+bg="#00${bg#\#}"
+fg="#ff${fg#\#}"
+
+fn='cozette'
+
+clock() {
+    echo "$(date '+%a %d') %{R}%{F$tfg1} $(date +%H:%M) %{F$bg}%{R}"
+}
+
+wifi() {
+    if=$(interface)
+    rfkill="$(LC_ALL=C rfkill -r | grep wlan | cut -d ' ' -f 4)"
+    [ "$rfkill" = "blocked" ] && return
+    ssid=$(iwgetid -r $if)
+    echo "ssid %{R}%{F$tfg1} ${ssid:--} %{F$bg}%{R}"
+}
+
+diskavail() {
+    df -h | grep /dev/root | read _ _ _ avail _
+    printf '%s' "$avail"
+}
+
+while sleep 1; do
+    printf '%%{c} %s %s %s %s\n' \
+        "$(clock)" \
+        "$(wifi)" \
+        "$(diskavail)"
+done | lemonbar  -db -B "$bg" -F "$fg" -f "$fn" -g 1920x32+0+0 | sh
