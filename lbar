@@ -25,13 +25,30 @@ wifi() {
 }
 
 diskavail() {
-    df -h | grep /dev/root | read _ _ _ avail _
-    printf '%s' "$avail"
+    avail=$(df -h | grep /dev/root | awk '{ print $4 }')
+    echo "disk %{R}%{F$tfg1} ${avail:--} %{F$bg}%{R}"
+}
+
+memory() {
+    while IFS=: read -r a b
+    do
+        b=${b%kB}
+
+        case $a in
+            MemTotal) x=$((x+=b)) ;;
+            Shmem) x=$((x+=b)) ;;
+            MemFree|Buffers|Cached|SReclaimable) x=$((x-=b)) ;;
+        esac
+    done </proc/meminfo
+    x=$((x/=1024))
+
+    echo "mem %{R}%{F$tfg1} ${x:--} MiB %{F$bg}%{R}"
 }
 
 while sleep 1; do
-    printf '%%{c} %s %s %s %s\n' \
+    printf '%%{c} %s %s %s %s %s\n' \
         "$(clock)" \
         "$(wifi)" \
-        "$(diskavail)"
-done | lemonbar  -db -B "$bg" -F "$fg" -f "$fn" -g 1920x32+0+0 | sh
+        "$(diskavail)" \
+        "$(memory)"
+done | lemonbar  -db -B "$bg" -F "$fg" -f "$fn" -g 1920x32+0+0
