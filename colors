@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+# colors - dump pywal colorscheme
+# (c) Kiëd Llaentenn <kiedtl@protonmail.com>
+# See the LICENSE for copyright information.
+
+cat $HOME/.cache/wal/colors | \
+    tr '\n' ' ' | \
+    sed 's/\#//g'
+
+printf '\n'
