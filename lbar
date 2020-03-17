@@ -51,4 +51,4 @@ while sleep 1; do
         "$(wifi)" \
         "$(diskavail)" \
         "$(memory)"
-done | lemonbar  -db -B "$bg" -F "$fg" -f "$fn" -g 1920x32+0+0
+done | lemonbar  -dB "$bg" -F "$fg" -f "$fn" -g 1920x32+0+0

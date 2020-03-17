@@ -2,16 +2,18 @@
 #
 # wfi - Connect to Wi-Fi
 # Create configuration with the following command:
-# sudo wpa_passphrase NETWORK P@S$W0rD1234 | sudo tee /etc/wpa_supplicant.conf
+# wpa_passphrase NETWORK P@S$W0rD1234 | tee /etc/wpa_supplicant.conf
 # by Kied Llaentenn (@kiedtl)
 
 INTERFACE=$(interface)
+INTERFACE=${INTERFACE:-wlan0}
 
 main() {
-	sudo killall wpa_supplicant; sudo killall dhcpcd
-	sudo ip l set $INTERFACE up
-	sudo wpa_supplicant -B -c /etc/wpa_supplicant/wpa_supplicant.conf -i $INTERFACE
-	sudo dhcpcd
+	pkill wpa_supplicant
+    pkill dhcpcd
+	ip l set $INTERFACE up
+	wpa_supplicant -Bc /etc/wpa_supplicant/wpa_supplicant.conf -i $INTERFACE
+	dhcpcd
 }
 
 main "$@"
