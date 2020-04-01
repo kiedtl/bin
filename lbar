@@ -1,10 +1,11 @@
 #!/bin/sh
 #
-# lbar: lemonbar script
+# lbar: the unholy lemonbar
 # credits: u/z-brah
 
 bg=$(xrdb -query | grep "*.foreground" | awk '{ print $2 }') #00ffffff
 fg=$(xrdb -query | grep "*.background" | awk '{ print $2 }') #ff666b7d
+ac=$(xrdb -query | grep "*.color2:" | awk '{ print $2 }')
 
 tfg1="${bg}"
 bg="#00${bg#\#}"
