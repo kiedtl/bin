@@ -4,8 +4,13 @@
 # (c) Kied Llaentenn (@kiedtl)
 # See the LICENSE for more information.
 
+[ -d "$1" ] && {
+    printf "ed: cannot edit directory!!\n";
+    exit 1;
+}
+
 [ ! -f "$1" ] && {
-    printf "ed: \"${1}\" doesn't exist -- create? [nY] ";
+    printf "ed: \"${1}\" doesn't exist -- create? [yN] ";
     read ans;
 
     case "$ans" in
@@ -14,4 +19,4 @@
     esac
 }
 
-[ -f "$1" ] && nvim "$1"
+[ -f "$1" ] && "$EDITOR" "$@"
