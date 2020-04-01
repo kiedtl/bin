@@ -7,11 +7,11 @@
 [ -d "~/img/wallpapers" ] && \
     git clone git@github.com:kiedtl/walls ~/img/wallpapers
 
-command -v wal 2>/dev/null >&1 || exit 1
+command -v wal 2>/dev/null >&2 || exit 1
 
 wal -i ~/img/wallpapers/${1:-}
 
 pkill lbar     || :
 pkill lemonbar || :
 
-exec lbar
+lbar &
