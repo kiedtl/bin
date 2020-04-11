@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+# bra - get git branch
+# (c) Kiëd Llaentenn <kiedtl@protonmail.com>
+# See the COPYING file for copyright information.
+#
+# usage: bra [-n]
+#     -n    don't output a newline
+
+(git rev-parse --abbrev-ref HEAD 2>/dev/null || \
+    echo 'none') | tr -d '\n'
+
+[ "$1" = "-n" ] || printf '\n'
