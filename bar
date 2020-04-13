@@ -15,8 +15,18 @@ get_dwminfo() {
 }
 
 main() {
-	killall polybar
-	exec polybar bar
+	pkill polybar
+
+    bg=$(xrdb -query | grep "*.background" | awk '{ print $2 }')
+    fg=$(xrdb -query | grep "*.foreground" | awk '{ print $2 }')
+    ac=$(xrdb -query | grep "*.color1:" | awk '{ print $2 }')
+
+    export WKSPC_LABEL="%{F$bg}%{B$ac}  %name%  %{F$fg}%{B$bg}"
+    export  TIME_LABEL="%{F$bg}%{B$ac}  %time%  %{F$fg}%{B$bg}"
+    export  DISK_LABEL="%{F$ac}DISK%{F$fg} %free%"
+    export   MEM_LABEL="%{F$ac}MEM%{F$fg} %mb_used%  "
+
+    exec polybar -r bar
 }
 
 main "$@"
