@@ -4,6 +4,9 @@
 # (c) Kiëd Llaentenn <kiedtl@protonmail.com>
 # See the LICENSE for copyright information.
 
+[ -f "$HOME/.cache/wal/colors" ] || \
+    exit 1
+
 cat $HOME/.cache/wal/colors | \
     tr '\n' ' ' | \
     sed 's/\#//g'
