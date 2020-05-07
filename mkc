@@ -1,0 +1,53 @@
+#!/bin/sh
+#
+# mkc - create wal colorscheme
+# (c) Kiëd Llaentenn <kiedtl@protonmail.com>
+# See the COPYING file for copyright information.
+
+case "$1" in
+    p*)
+        paleta ~/etc/colors/peaceful
+        16
+
+        colors=
+        for i in 0 1 2 3 4 5 6 7
+        do
+            colors="$colors $(colorpicker -qod)"
+        done
+
+        echo $colors $colors
+        ;;
+    w*)
+        shift
+        cat <<EOF
+{
+    "wallpaper": "CHANGEME",
+    "alpha": "100",
+    "special": {
+        "background": "$1",
+        "foreground": "$8",
+        "cursor": "$8"
+    },
+    "colors": {
+        "color0": "$1",
+        "color1": "$2",
+        "color2": "$3",
+        "color3": "$4",
+        "color4": "$5",
+        "color5": "$6",
+        "color6": "$7",
+        "color7": "$8",
+        "color8": "$9",
+        "color9": "$10",
+        "color10": "$11",
+        "color11": "$12",
+        "color12": "$13",
+        "color13": "$14",
+        "color14": "$15",
+        "color15": "$16"
+    }
+}
+
+EOF
+    ;;
+esac

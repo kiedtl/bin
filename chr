@@ -1,0 +1,23 @@
+#!/bin/sh
+#
+# chr - chroot
+# (c) Kiëd Llaentenn <kiedtl@protonmail.com>
+# See the COPYING file for copyright information.
+
+mount --bind ~/glibc ~/glibc || exit 1
+
+[ -f ~/glibc/etc/hosts] || \
+    cp -L /etc/hosts ~/glibc/etc/hosts
+
+[ -f ~/glibc/etc/resolv.conf ] || \
+    cp -L /etc/resolv.conf ~/glibc/etc/resolv.conf
+
+mount -t proc none ~/glibc/proc || exit 1
+mount -t sysfs none ~/glibc/sys || exit 1
+
+mount --rbind /dev ~/glibc/dev || exit 1
+mount --rbind /run ~/glibc/run || exit 1
+
+chroot ~/glibc
+
+umount -Rl ~/glibc
