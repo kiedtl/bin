@@ -2,7 +2,7 @@
 #
 # c - cat, cd, and clear into one unified script
 # (c) Kied Llaentenn (@kiedtl)
-# See the LICENSE for more information.
+# See the COPYING for more information.
 #
 # Note: this is not a script. it must be sourced to work.
 

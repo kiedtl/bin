@@ -2,7 +2,7 @@
 #
 # mk - build a project
 # (c) Kiëd Llaentenn <kiedtl@protonmail.com>
-# See the LICENSE for copyright information.
+# See the COPYING for copyright information.
 
 com=
 

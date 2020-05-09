@@ -2,7 +2,7 @@
 #
 # wttr - `curl wttr.in` wrapper
 # (c) Kied Llaentenn (@kiedtl)
-# See the LICENSE for more information.
+# See the COPYING for more information.
 
 main() {
 	curl wttr.in

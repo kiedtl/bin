@@ -2,7 +2,7 @@
 #
 # 256 -- print colors in the 256 palette
 # (c) Kiëd Llaentenn
-# See the LICENSE for more information
+# See the COPYING for more information
 
 e="$(printf "\033")"
 

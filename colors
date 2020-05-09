@@ -2,7 +2,7 @@
 #
 # colors - dump pywal colorscheme
 # (c) Kiëd Llaentenn <kiedtl@protonmail.com>
-# See the LICENSE for copyright information.
+# See the COPYING for copyright information.
 
 [ -f "$HOME/.cache/wal/colors" ] || \
     exit 1
