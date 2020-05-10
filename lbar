@@ -11,10 +11,14 @@ tfg1="${bg}"
 bg="#00${bg#\#}"
 fg="#ff${fg#\#}"
 
-fn='cozette'
+fn='ttyp0'
 
 clock() {
-    echo "$(date '+%a %d') %{R}%{F$tfg1} $(date +%H:%M) %{F$bg}%{R}"
+    echo "$(date '+%a %d') $(date +%H:%M)"
+}
+
+name() {
+    xdotool getwindowfocus getwindowname
 }
 
 wifi() {
@@ -22,12 +26,12 @@ wifi() {
     rfkill="$(LC_ALL=C rfkill -r | grep wlan | cut -d ' ' -f 4)"
     [ "$rfkill" = "blocked" ] && return
     ssid=$(iwgetid -r $if)
-    echo "ssid %{R}%{F$tfg1} ${ssid:--} %{F$bg}%{R}"
+    echo "${ssid:--}"
 }
 
 diskavail() {
     avail=$(df -h | grep /dev/root | awk '{ print $4 }')
-    echo "disk %{R}%{F$tfg1} ${avail:--} %{F$bg}%{R}"
+    echo "${avail:--}"
 }
 
 memory() {
@@ -43,13 +47,13 @@ memory() {
     done </proc/meminfo
     x=$((x/=1024))
 
-    echo "mem %{R}%{F$tfg1} ${x:--} MiB %{F$bg}%{R}"
+    echo "${x:--} MiB"
 }
 
 while sleep 1; do
-    printf '%%{c} %s %s %s %s %s\n' \
+    printf '%%{l}  %s %%{c} %s %%{r} %s %s %s \n' \
+        "$(name)" \
         "$(clock)" \
-        "$(wifi)" \
-        "$(diskavail)" \
-        "$(memory)"
+        "$(memory)" \
+        "$(diskavail)"
 done | lemonbar  -dB "$bg" -F "$fg" -f "$fn" -g 1920x32+0+0
