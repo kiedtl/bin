@@ -2,7 +2,7 @@
 #
 # ed - open file in editor.
 # (c) Kied Llaentenn (@kiedtl)
-# See the LICENSE for more information.
+# See the COPYING for more information.
 
 [ -d "$1" ] && {
     printf "ed: cannot edit directory!!\n";

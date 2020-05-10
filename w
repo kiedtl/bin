@@ -2,7 +2,7 @@
 #
 # w - change wallpaper
 # (c) Kiëd Llaentenn <kiedtl@protonmail.com>
-# See the LICENSE for copyright information.
+# See the COPYING for copyright information.
 
 [ -d "~/img/wallpapers" ] && \
     git clone git@github.com:kiedtl/walls ~/img/wallpapers

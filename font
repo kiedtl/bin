@@ -2,7 +2,7 @@
 #
 # font - list and preview fonts
 # (c) Kied Llaentenn (@kiedtl)
-# See the LICENSE for more information.
+# See the COPYING for more information.
 
 output=${1}
 

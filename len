@@ -2,7 +2,7 @@
 #
 # len - get number of lines in a file
 # (c) Kied Llaentenn (@kiedtl)
-# See the LICENSE for more information.
+# See the COPYING for more information.
 
 [ "$1" ] || exit 1
 

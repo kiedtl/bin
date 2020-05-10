@@ -8,7 +8,7 @@
 #		ndmen /etc/some_file_with_multiple_lines /bin/cat
 #
 # (c) Kied Llaentenn
-# see the LICENSE for more info.
+# see the COPYING for more info.
 
 . ~/.cache/wal/colors.sh
 

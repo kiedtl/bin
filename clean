@@ -2,7 +2,7 @@
 #
 # clean - remove orphaned packages and clean cache directory
 # (c) Kied Llaentenn (@kiedtl)
-# See the LICENSE for more information.
+# See the COPYING for more information.
 
 if command -v xbps-remove >/dev/null 2>&1; then
     xbps-remove -o
