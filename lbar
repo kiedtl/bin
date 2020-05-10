@@ -18,7 +18,11 @@ clock() {
 }
 
 name() {
-    xdotool getwindowfocus getwindowname
+    nm="$(xdotool getwindowfocus getwindowname)"
+    case $nm in
+        Awesome*) printf '\n' ;;
+        *) printf '%s' "$nm" ;;
+    esac
 }
 
 wifi() {
@@ -50,7 +54,7 @@ memory() {
     echo "${x:--} MiB"
 }
 
-while sleep 1; do
+while sleep 0.1; do
     printf '%%{l}  %s %%{c} %s %%{r} %s %s %s \n' \
         "$(name)" \
         "$(clock)" \
