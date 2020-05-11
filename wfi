@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 #
 # wfi - Connect to Wi-Fi
 # Create configuration with the following command:

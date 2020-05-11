@@ -1,7 +1,7 @@
-#!/usr/bin/env bash
+#!/bin/sh
 #
 # scr: take a screenshot.
-# stolen from Dylan Araps, the King of Shell
+# (c) Dylan Araps
 
 scr_dir=~/img/screenshots
 

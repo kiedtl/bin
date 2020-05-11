@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 #
 # extract - an all-purpose file archive extractor
 # from Manjaro Linux

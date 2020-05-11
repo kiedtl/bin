@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# mks - create a bash script using a template.
+# mks - create a shell script using a template.
 # partly stolen from Dylan Arap's dotfiles.
 
 [ -z "$1" ] && exit
