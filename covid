@@ -1,0 +1,21 @@
+#!/bin/sh
+#
+# http://github.com/mitchweaver/bin
+#
+# output current COVID-19 statistics
+#
+
+url="https://coronavirus-tracker-api.herokuapp.com/all"
+
+read -r confirmed deaths recovered <<EOF
+$(curl -sf "$url" | \
+    jq -r '.latest | "\(.confirmed) \(.deaths) \(.recovered)"')
+EOF
+
+percent_deaths="$(echo "(${deaths}*100)/$confirmed" | bc)"
+percent_recovered="$(echo "(${recovered}*100)/$confirmed" | bc)"
+
+printf '%10s total /%10s died (%s %%) /%10s recovered (%s %%) ♥\n' \
+    "$confirmed" \
+    "$deaths" "$percent_deaths" \
+    "$recovered" "$percent_recovered"

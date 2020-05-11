@@ -1,0 +1,13 @@
+#!/bin/sh
+
+[ "$1" ] || { read -r inp && set "$inp" ; }
+
+exec curl \
+    --ipv4 \
+    --disable \
+    --location \
+    --retry 2 \
+    --continue-at - \
+    --url "$1" \
+    --progress-bar \
+    --output "${1##*/}"
