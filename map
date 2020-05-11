@@ -1,0 +1,12 @@
+#!/bin/sh
+#
+# map - execute command for each item in stdin
+# (c) Kiëd Llaentenn <kiedtl@protonmail.com>
+# See the COPYING file for copyright information.
+
+read items
+
+for item in $items
+do
+    $@ "$item"
+done
