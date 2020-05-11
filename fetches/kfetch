@@ -1,0 +1,67 @@
+#!/bin/dash
+#
+# kfetch - tiny system info for linux.
+# (c) Kied Llaentenn
+# see the LICENSE for more information
+
+export LC_ALL=C;. /etc/os-release;k=`uname -r`;s=`cat /proc/uptime`;s=${s%%.*};d=$((s/86400));h=$((s/3600%24));m=$((s/60%60));[ $d = 0 ]||u="${u}${d}d ";[ $h = 0 ]||u="${u}${h}h ";[ $m = 0 ]||u="${u}${m}m";while IFS=: read -r a b;do b=${b%kB};case $a in MemTotal)x=$((x+=b));t=$((t=b));;Shmem)x=$((x+=b));;MemFree|Buffers|Cached|SReclaimable)x=$((x-=b));;esac;done</proc/meminfo;x=$((x/=1024));t=$((t/=1024))
+
+# ===== OUTPUT =====
+
+# For Arch users:
+#
+#        /\
+#       /  \
+#      /\   \
+#     /  __  \
+#    /  (  )  \
+#   / __/  \__\\
+#  /.`        `.\
+
+# For Alpine users:
+#
+#        /\
+#       /  \
+#      / /\ \  /\
+#     / /  \ \/  \
+#    / /    \ \/\ \
+#   / / /|   \ \ \ \
+#  /_/ /_|    \_\ \_\
+
+# For Void users:
+#
+#      -------
+#   _ \______ -
+#  | \  ___  \ |
+#  | | /   \ | |
+#  | | \___/ | |
+#  | \______ \_|
+#   -_______\
+
+# other
+#
+#      .--.
+#     |o_o |
+#     |:_/ |
+#    //   \ \
+#   (|     | )
+#  /'\_   _/`\
+#  \---)=(---/
+
+# For bunnies:
+#
+# (\/)
+# ( . .)
+# c(")(")
+
+echo "
+    ___     ${USER:-`id -nu`}@${HOSTNAME:-`hostname`}
+   (.· |    os      ${PRETTY_NAME:-?}
+   (<> |    uptime  $u
+  / __  \   editor  ${EDITOR:-?}
+ ( /  \ /|  shell   ${SHELL##*/}
+_/\ __)/_)  memory  ${x}MiB / ${t}MiB
+\/-____\/   kernel  $k
+"
+
+# EOF
