@@ -3,12 +3,12 @@
 # lbar: the unholy lemonbar
 # credits: u/z-brah
 
-bg=$(xrdb -query | grep "*.foreground" | awk '{ print $2 }') #00ffffff
+bg=$(xrdb -query | grep "*.color1" | awk '{ print $2 }') #00ffffff
 fg=$(xrdb -query | grep "*.background" | awk '{ print $2 }') #ff666b7d
 ac=$(xrdb -query | grep "*.color2:" | awk '{ print $2 }')
 
 tfg1="${bg}"
-bg="#00${bg#\#}"
+bg="#ff${bg#\#}"
 fg="#ff${fg#\#}"
 
 fn='ttyp0'
@@ -60,4 +60,4 @@ while sleep 0.1; do
         "$(clock)" \
         "$(memory)" \
         "$(diskavail)"
-done | lemonbar  -dB "$bg" -F "$fg" -f "$fn" -g 1920x32+0+0
+done | lemonbar  -dB "$bg" -F "$fg" -f "$fn" -g 1920x24+0+0

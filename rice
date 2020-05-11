@@ -18,7 +18,7 @@ main() {
     xcompmgr &
 
 	# start bars
-	bar &
+	lbar &
 }
 
 main "$@"

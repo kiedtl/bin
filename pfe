@@ -23,5 +23,4 @@ ${image}     ( . ·)     ${label}  EDITOR  ${reset}${EDITOR:-?}
 ${image}     c(\")(\")    ${label}  SHELL   ${reset}${SHELL##*/}
 ${image}                ${label}  MEMORY  ${reset}${x}MiB / ${t}MiB
 ${image}                ${label}  KERNEL  ${reset}$k
-                  ${label}PKGS    ${reset}`xbps-query -l | wc -l`
-"
+                  ${label}PKGS    ${reset}`xbps-query -l | wc -l`"
