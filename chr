@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # chr - chroot
-# (c) Kiëd Llaentenn <kiedtl@protonmail.com>
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
 # See the COPYING file for copyright information.
 
 mount --bind ~/glibc ~/glibc || exit 1

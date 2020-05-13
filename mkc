@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # mkc - create wal colorscheme
-# (c) Kiëd Llaentenn <kiedtl@protonmail.com>
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
 # See the COPYING file for copyright information.
 
 case "$1" in

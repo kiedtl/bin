@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # mk - build a project
-# (c) Kiëd Llaentenn <kiedtl@protonmail.com>
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
 # See the COPYING for copyright information.
 
 com=

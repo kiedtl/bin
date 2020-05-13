@@ -2,10 +2,10 @@
 #
 # ndmen: dmenu wrapper with better defaults
 # usage: ndmen [FILE] [SHELL] [W] [H] [X] [Y]
-# 	FILE default: dmenu_path
+#	FILE default: dmenu_path
 #	SHELL default: /bin/sh
 #	example:
-#		ndmen /etc/some_file_with_multiple_lines /bin/cat
+#	ndmen /etc/some_file_with_multiple_lines /bin/cat
 #
 # (c) Kied Llaentenn
 # see the COPYING for more info.

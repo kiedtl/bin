@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # term - my terminal of choice
-# (c) Kiëd Llaentenn <kiedtl@protonmail.com>
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
 # See the COPYING file for copyright information.
 
 # execute alacritty if installed

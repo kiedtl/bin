@@ -10,7 +10,7 @@ echo "#!/bin/sh
 
 [ -z "$2" ] || echo "# $1 - $2" >> "$1"
 
-echo "# (c) Kiëd Llaentenn <kiedtl@protonmail.com>
+echo "# (c) Kiëd Llaentenn <kiedtl@tilde.team>
 # See the COPYING file for copyright information.
 
 " >> "$1"
