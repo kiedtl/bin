@@ -5,6 +5,9 @@
 # See the COPYING for more information.
 
 main() {
+    # set dwm's resources
+    dwm_rice
+
 	# merge Xresources
 	xrdb -merge ~/etc/Xorg/.Xresources
 
@@ -18,8 +21,7 @@ main() {
     xcompmgr &
 
 	# start bars
-	lbar &
+	bar &
 }
 
 main "$@"
-
