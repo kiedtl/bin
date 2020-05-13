@@ -1,0 +1,18 @@
+#!/bin/sh
+#
+# dwm_rice: generate xresources for dwm
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
+# See the COPYING file for copyright information.
+
+setxr() {
+    echo "${1}: $2" | xrdb -merge || exit 1
+}
+
+set -- $(colors)
+
+setxr "dwm.normbordercolor" "$8"  # black
+setxr "dwm.normbgcolor"     "$1"  # white
+setxr "dwm.normfgcolor"     "$8"  # black
+setxr "dwm.selbordercolor"  "$8"  # black
+setxr "dwm.selbgcolor"      "$1"  # white
+setxr "dwm.selfgcolor"      "$8"  # black
