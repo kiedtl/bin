@@ -27,12 +27,12 @@ while [ "$1" ] ; do
             usage
             ;;
          *)
-             url=http://source.unsplash.com/1920x1080/?$(echo $@ | tr ' ' ',')
+             url=http://source.unsplash.com/2400x1600/?$(echo $@ | tr ' ' ',')
              break
     esac
 done
 
-curl -L -# -C - -o $file --url ${url:-http://source.unsplash.com/random/1920x1080}
+curl -L -# -C - -o $file --url ${url:-http://source.unsplash.com/random/2400x1600}
 convert $file ${file%png}jpg
 rm $file
 file=${file%png}jpg
