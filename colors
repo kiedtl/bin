@@ -1,14 +1,13 @@
 #!/bin/sh
 #
 # colors - dump pywal colorscheme
-# (c) Kiëd Llaentenn <kiedtl@protonmail.com>
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
 # See the COPYING for copyright information.
 
 [ -f "$HOME/.cache/wal/colors" ] || \
     exit 1
 
 cat $HOME/.cache/wal/colors | \
-    tr '\n' ' ' | \
-    sed 's/\#//g'
+    tr '\n' ' '
 
 printf '\n'
