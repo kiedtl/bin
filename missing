@@ -19,23 +19,26 @@ chk() {
 printf 'missing:\n'
 
 # basic
-chk awk sed grep pgrep file
+chk awk sed grep pgrep file less
 
 # rust utils
 chk exa fd rg tokei hyperfine dust
 
 # c programming
-chk gcc ld.lld make nvim git gdb
+chk gcc ld.lld make nvim git gdb scdoc
 
 # other languages
-chk bash mksh tclsh lua
+chk bash mksh tclsh dash
 
 # xorg
-chk awesome startx xterm dmenu wal slock polybar lemonbar \
-    xsel xmodmap xdotool xsetroot xrdb xprop
+chk awesome startx xterm dmenu slock polybar lemonbar \
+    xsel xmodmap xdotool xsetroot xrdb xprop xcompmgr xautolock
+
+# ricing
+chk wal paleta
 
 # programs
-chk mupdf netsurf feh
+chk mupdf netsurf feh taizen weechat convert
 
 # networking
 chk ssh wpa_supplicant curl wget
@@ -44,6 +47,6 @@ chk ssh wpa_supplicant curl wget
 chk htop pv
 
 # misc
-chk xz bzip2 gzip unzip gpg2 jq
+chk xz bzip2 gzip unzip gpg2 jq gfe lcharmap kjv
 
 printf '%s not found\n' "$missing"
