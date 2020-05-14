@@ -6,17 +6,32 @@
 
 com=
 
+# prefer samurai, it's a bit faster
+samu="samu"
+command -v "$samu" 2>/dev/null >&2 || \
+    samu="ninja"
+
+# GNU Make
 [ -f makefile ] && com="make"
 [ -f Makefile ] && com="make"
 
-if [ -f meson.build ]
+# Meson
+[ -f meson.build ] && com="$samu -C build"
+
+# CMake
+if [ -f CMakeLists.txt ]
 then
-    if command -v samu 2>/dev/null >&2
-    then
-        com="samu -C build"
-    else
-        com="ninja -C build"
-    fi
+    mkdir -p build && cd build
+    cmake .. \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_UNITY_BUILD=True \
+        -GNinja || \
+        exit 1
+    com="$samu"
 fi
+
+# Rust
+[ -f Cargo.toml ] && \
+    com="cargo build --release -j$(nproc)"
 
 $com $@
