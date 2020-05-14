@@ -2,12 +2,19 @@
 
 [ "$1" ] || { read -r inp && set "$inp" ; }
 
-exec curl \
-    --ipv4 \
-    --disable \
-    --location \
-    --retry 2 \
-    --continue-at - \
-    --url "$1" \
-    --progress-bar \
-    --output "${1##*/}"
+case "$1" in
+    *".git"*)
+        exec git clone --depth=1 "$1"
+    ;;
+    *)
+        exec curl \
+            --ipv4 \
+            --disable \
+            --location \
+            --retry 2 \
+            --continue-at - \
+            --url "$1" \
+            --progress-bar \
+            --output "${1##*/}"
+    ;;
+esac
