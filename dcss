@@ -1,0 +1,8 @@
+#!/bin/sh
+#
+# dcss - no more dcss
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
+# See the COPYING file for copyright information.
+
+train
+echo "No. Stop."
