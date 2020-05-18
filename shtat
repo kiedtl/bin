@@ -1,0 +1,26 @@
+#!/bin/mksh
+#
+# shtat - primitive shell history statistics
+# NOTE: must be sourced to work.
+#
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
+# See the COPYING file for copyright information.
+
+shtat() {
+    history 0 | \
+        awk \
+            '{
+                commands[$2]+=1
+                total+=1
+            }
+
+            END {
+                for (command in commands) {
+                    percentage=(commands[command]*100)/total
+                    printf "%-5s %8s%%    %s\n", commands[command], percentage, command
+                }
+            }' | \
+        sort -bnr | \
+        nl | \
+        head -n "${1:-5}"
+}
