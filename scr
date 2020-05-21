@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # scr: take a screenshot.
 # (c) Dylan Araps

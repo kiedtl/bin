@@ -4,11 +4,11 @@
 # Must be run as root!
 # (c) Kied Llaentenn (@kiedtl)
 
-er=$(interface)
+inter=$(interface)
 
-l set "${inter}" down
-l set "${inter}" address "${1}"
+ip l set "${inter}" down
+ip l set "${inter}" address "${1}"
 
-config wlan0 down hw ether $1
-l set "${inter}" up
+#ifconfig wlan0 down hw ether $1
+ip l set "${inter}" up
 wfi

@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # --- colors ---
-image=$(printf "\033[1m")
-label=$(printf "\033[1m")
+image=$(printf "\033[7m")
+label=$(printf "\033[m\033[1m")
 reset=$(printf "\033[0m")
 
 # --- ascii art ---
@@ -16,18 +16,18 @@ _/\ __)/_)
 \/_____\/"
 
 # --- information ---
-. /etc/os-release;k=`uname -r`;s=`cat /proc/uptime`;s=${s%%.*};d=$((s/86400));h=$((s/3600%24));m=$((s/60%60));[ $d = 0 ]||u="${u}${d}d ";[ $h = 0 ]||u="${u}${h}h ";[ $m = 0 ]||u="${u}${m}m";while IFS=: read -r a b;do b=${b%kB};case $a in MemTotal)x=$((x+=b));t=$((t=b));;Shmem)x=$((x+=b));;MemFree|Buffers|Cached|SReclaimable)x=$((x-=b));;esac;done</proc/meminfo;x=$((x/=1024));t=$((t/=1024))
-title="${USER}@$(hostname)"
+. /etc/os-release;k=`uname -r`;while IFS=: read -r a b;do b=${b%kB};case $a in MemTotal)x=$((x+=b));t=$((t=b));;Shmem)x=$((x+=b));;MemFree|Buffers|Cached|SReclaimable)x=$((x-=b));;esac;done</proc/meminfo;x=$((x/=1024));t=$((t/=1024))
 
 # --- display ---
 echo "
-${image}    ___    ${label} $title ${reset}
-${image}   (.· |   ${label} $(echo "$title" | sed 's/./─/g')
-${image}   (<> |   ${label} os      ${reset}${PRETTY_NAME:-?}
-${image}  / __  \  ${label} uptime  ${reset}$u
-${image} ( /  \ /| ${label} editor  ${reset}${EDITOR:-?}
-${image}_/\ __)/_) ${label} shell   ${reset}${SHELL##*/}
-${image}\/_____\/  ${label} memory  ${reset}${x}MiB / ${t}MiB
-${image}           ${label} kernel  ${reset}$k
-${image}           ${label} pkgs    ${reset}`xbps-query -l | wc -l`
+${image}                  ${label}  USER    ${reset}${USER}@$(hostname)
+${image}        ___       ${label}  OS      ${reset}${PRETTY_NAME:-?}
+${image}       (.· |      ${label}  UPTIME  ${reset}`uptime`
+${image}       (<> |      ${label}  EDITOR  ${reset}${EDITOR:-?}
+${image}      / __  \     ${label}  SHELL   ${reset}${SHELL##*/}
+${image}     ( /  \ /|    ${label}  MEMORY  ${reset}${x}MiB / ${t}MiB
+${image}    _/\ __)/_)    ${label}  WM      ${reset}2bwm
+${image}    \/_____\/     ${label}  PKGS    ${reset}`xbps-query -l | wc -l` (xbps)
+${image}                  ${label}  TEMP    ${reset}`temp`
+${image}                  ${label}  KERNEL  ${reset}$k
 "
