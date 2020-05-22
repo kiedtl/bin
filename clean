@@ -8,3 +8,5 @@ if command -v xbps-remove >/dev/null 2>&1; then
     xbps-remove -o
     rm -rf /var/cache/xbps/*
 fi
+
+[ -d ~/opt/.cargo ] && rm -rf ~/opt/.cargo
