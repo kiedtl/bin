@@ -9,7 +9,7 @@ missing=0
 
 chk() {
     for i ; do
-        type $i >/dev/null || {
+        type $i 2>/dev/null >&2 || {
             >&2 printf '    * %s\n' $i;
             missing="$((missing+1))"
         }
