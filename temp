@@ -12,5 +12,5 @@ case $(uname) in
         ;;
     Linux)
         read -r tmp </sys/class/thermal/thermal_zone0/temp
-        printf '%s°C\n' "${tmp%???}"
+        printf '%s C\n' "${tmp%???}"
 esac
