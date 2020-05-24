@@ -1,33 +1,45 @@
 #!/bin/sh
 
 # --- colors ---
-image=$(printf "\033[7m")
-label=$(printf "\033[m\033[1m")
+image=$(printf "\033[31m\033[7m")
+label=$(printf "\033[0m\033[31m")
 reset=$(printf "\033[0m")
-
-# --- ascii art ---
-
-ascii="    ___
-   (.· |
-   (<> |
-  / __  \
- ( /  \ /|
-_/\ __)/_)
-\/_____\/"
 
 # --- information ---
 . /etc/os-release;k=`uname -r`;while IFS=: read -r a b;do b=${b%kB};case $a in MemTotal)x=$((x+=b));t=$((t=b));;Shmem)x=$((x+=b));;MemFree|Buffers|Cached|SReclaimable)x=$((x-=b));;esac;done</proc/meminfo;x=$((x/=1024));t=$((t/=1024))
 
 # --- display ---
-echo "
-${image}                  ${label}  USER    ${reset}${USER}@$(hostname)
-${image}        ___       ${label}  OS      ${reset}${PRETTY_NAME:-?}
-${image}       (.· |      ${label}  UPTIME  ${reset}`uptime`
-${image}       (<> |      ${label}  EDITOR  ${reset}${EDITOR:-?}
-${image}      / __  \     ${label}  SHELL   ${reset}${SHELL##*/}
-${image}     ( /  \ /|    ${label}  MEMORY  ${reset}${x}MiB / ${t}MiB
-${image}    _/\ __)/_)    ${label}  WM      ${reset}2bwm
-${image}    \/_____\/     ${label}  PKGS    ${reset}`xbps-query -l | wc -l` (xbps)
-${image}                  ${label}  TEMP    ${reset}`temp`
-${image}                  ${label}  KERNEL  ${reset}$k
+ascii="
+${image}                        
+${image}                        
+${image}           ___          
+${image}          (.· |         
+${image}          (<> |         
+${image}         / __  \        
+${image}        ( /  \ /|       
+${image}       _/\ __)/_)       
+${image}       \/_____\/        
+${image}                        
+${image}                        
+${image}                        
 "
+
+echo "$ascii"
+
+print_info() {
+    printf '%s%-8s%s%16s\n' "${label}" "$1" \
+        "${reset}" "$2"
+}
+
+print_info "USER"   "${USER}@$(hostname)"
+print_info "OS"     "${PRETTY_NAME:-?}"
+print_info "UPTIME" "$(uptime)"
+print_info "WM"     "2bwm"
+print_info "EDITOR" "neovim"
+print_info "SHELL"  "${SHELL##*/}"
+print_info "PKGS"   "$(xbps-query -l | wc -l)"
+print_info "MEMORY" "${x}M / ${t}M"
+print_info "TEMP"   "$(temp)"
+print_info "KERNEL" "$k"
+
+16
