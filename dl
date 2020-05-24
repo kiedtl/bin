@@ -3,9 +3,6 @@
 [ "$1" ] || { read -r inp && set "$inp" ; }
 
 case "$1" in
-    *".git"*)
-        exec git clone --depth=1 "$1"
-    ;;
     *)
         exec curl \
             --ipv4 \
