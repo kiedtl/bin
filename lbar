@@ -3,26 +3,25 @@
 # lbar: the unholy lemonbar
 # credits: u/z-brah
 
-bg=$(xrdb -query | grep "*.foreground" | awk '{ print $2 }') #00ffffff
-fg=$(xrdb -query | grep "*.background" | awk '{ print $2 }') #ff666b7d
-ac=$(xrdb -query | grep "*.color2:" | awk '{ print $2 }')
+read -r width height <<EOF
+$(dimensions)
+EOF
 
-tfg1="${bg}"
-bg="#00${bg#\#}"
-fg="#ff${fg#\#}"
+bg=$(xrdb -query | grep "*.color0" | awk '{ print $2 }') # background
+fg=$(xrdb -query | grep "*.color7" | awk '{ print $2 }') # foreground
+la=$(xrdb -query | grep "*.color3" | awk '{ print $2 }') # label
 
+tr="#00${bg#\#}"
 fn='ttyp0'
+fb='ttyp0:bold'
 
 clock() {
-    echo "$(date '+%a %d') $(date +%H:%M)"
+    echo -n "%{T2}$(date +%H%M)%{T-} %{F$la}hrs%{F$fg}  "
+    echo -n "%{T2}$(date '+%m/%d')%{T-} %{F$la}$(date +%Y)%{F$fg}"
 }
 
 name() {
-    nm="$(xdotool getwindowfocus getwindowname)"
-    case $nm in
-        Awesome*) printf '\n' ;;
-        *) printf '%s' "$nm" ;;
-    esac
+    printf '%s' "$(xdotool getwindowfocus getwindowname)"
 }
 
 wifi() {
@@ -34,8 +33,10 @@ wifi() {
 }
 
 diskavail() {
-    avail=$(df -h | grep /dev/root | awk '{ print $4 }')
-    echo "${avail:--}"
+    read -r used total <<EOF
+$(df | awk '/\/dev\/root/ { print $3 " " $2 }')
+EOF
+    echo "%{T2}$(((used*100)/$total))%%{T-} %{F$la}disk%{F-}"
 }
 
 memory() {
@@ -44,20 +45,20 @@ memory() {
         b=${b%kB}
 
         case $a in
-            MemTotal) x=$((x+=b)) ;;
+            MemTotal) x=$((x+=b)); t=$((t=b));;
             Shmem) x=$((x+=b)) ;;
             MemFree|Buffers|Cached|SReclaimable) x=$((x-=b)) ;;
         esac
     done </proc/meminfo
     x=$((x/=1024))
+    t=$((t/=1024))
 
-    echo "${x:--} MiB"
+    echo "%{T2}$(((x*100)/t))%%{T-} %{F$la}mem%{F-}"
 }
 
 while sleep 0.1; do
-    printf '%%{l}  %s %%{c} %s %%{r} %s %s %s \n' \
-        "$(name)" \
-        "$(clock)" \
-        "$(memory)" \
-        "$(diskavail)"
-done | lemonbar  -dB "$bg" -F "$fg" -f "$fn" -g 1920x24+0+0
+    printf '%%{l}%s %%{r} %s \n' \
+        "%{B$bg}  $(clock)  %{B$tr}" \
+        "%{B$bg}  $(memory) %{F$la}/%{F-} $(diskavail)  %{B$tr}"
+done | lemonbar  -dB "$tr" -F "$fg" -f "$fn" -f "$fb" -b \
+    -g $((width-24-24))x36+24+24
