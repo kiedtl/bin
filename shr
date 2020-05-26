@@ -4,4 +4,4 @@
 # (c) Kiëd Llaentenn (@kiedtl)
 # See the COPYING for more information.
 
-echo "¯\_(ツ)_/¯" | xclip -selection clipboard
+printf '%s\n' "¯\_(ツ)_/¯"
