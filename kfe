@@ -1,24 +1,25 @@
 #!/bin/sh
 
 # --- colors ---
-image=$(printf "\033[31m\033[7m")
-label=$(printf "\033[0m\033[31m")
-reset=$(printf "\033[0m")
+image=$(printf  "\033[0m")
+label=$(printf "\033[31m")
+reset=$(printf  "\033[0m")
 
 # --- display ---
+
 ascii="
-${image}                        
-${image}                        
-${image}           ___          
-${image}          (.· |         
-${image}          (<> |         
-${image}         / __  \        
-${image}        ( /  \ /|       
-${image}       _/\ __)/_)       
-${image}       \/_____\/        
-${image}                        
-${image}                        
-${image}                        
+${image}┌──────────────────────┐
+${image}│                      │
+${image}│          ___         │
+${image}│         (.· |        │
+${image}│         (<> |        │
+${image}│        / __  \       │
+${image}│       ( /  \ /|      │
+${image}│      _/\ __)/_)      │
+${image}│      \/_____\/       │
+${image}│                      │
+${image}│                      │
+${image}└──────────────────────┘
 "
 
 echo "$ascii"
@@ -36,8 +37,6 @@ print_info "UPTIME" "$(uptime)"
 print_info "WM"     "$(wm)"
 print_info "EDITOR" "neovim"
 print_info "SHELL"  "${SHELL##*/}"
-print_info "PKGS"   "$(pkgs)"
-print_info "MEMORY" "$(mem)"
 print_info "TEMP"   "$(temp)"
 print_info "KERNEL" "$(uname -r)"
 
