@@ -1,0 +1,24 @@
+#!/bin/sh
+#
+# glo -- Git LOg
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
+# See the COPYING file for copyright information.
+
+ttywidth="$(tput cols)"
+
+# 34 = 7 (hash) + 1 (spc) + 22 (email)
+width=34
+
+# use dc 'cause it's faster than bc :)
+foldwidth="$(echo "$ttywidth $width - p" | dc)"
+
+git log --format="%h %aE %s" | \
+    while read -r hash email subject
+    do
+        email="$(echo "$email" | tru 22)"
+        subject="$(echo "$subject" | tru "$foldwidth")"
+
+        printf '\033[31m%s \033[0;1m%25s\033[m %s\n' \
+            "$hash" "<$email>" "$subject"
+    done | \
+    head -n"${1:-10}"

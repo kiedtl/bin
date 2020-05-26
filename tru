@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+# tru - truncate text
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
+# See the COPYING file for copyright information.
+
+awk -v len="${1:-$(tput cols)}" \
+    '{
+        if (length($0) > len) print substr($0, 1, len - 3) "..."
+        else print
+    }'
