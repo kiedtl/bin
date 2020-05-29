@@ -1,0 +1,54 @@
+#!/bin/sh
+#
+# todo - simple LIFO-based TODO tracker
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
+# See the COPYING file for copyright information.
+
+TODOFILE="${TODOFILE:-$HOME/.cache/todo/todos}"
+
+# set default no. of TODOs to output
+[ -z "$1" ] && set -- 1
+
+case "$1" in
+    # print TODOs
+    [0-9]*)
+        head -n"$1" "$TODOFILE"
+    ;;
+
+    # new TODO
+    [Nn]*)
+        shift
+        echo "$@" > "$TODOFILE"
+    ;;
+
+    # remove TODO
+    [Rr]*)
+        printf '%s' \
+             "$(tail -n+2 "$TODOFILE")" \
+            > "$TODOFILE"
+    ;;
+
+    # count TODOs
+    [Cc]*)
+        wc -l < "$TODOFILE"
+    ;;
+
+    # fix TODO file (merge multiple blank lines)
+    [Ff]*)
+        cat "$TODOFILE" | squeeze > "$TODOFILE"
+    ;;
+
+    [Hh]*)
+        printf 'todo [action]\n'
+        printf 'actions:\n'
+        printf '    [0-9]   print todos\n'
+        printf '    new     new todo\n'
+        printf '    rm      remove todo\n'
+        printf '    count   count todos\n'
+        printf '    fix     fix todos\n'
+    ;;
+
+    *)
+        printf '%s: %s: unknown command\n' \
+            "$0" "$1" >&2
+esac
