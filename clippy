@@ -3,5 +3,4 @@
 # clippy: clipboard manager
 # (c) Kied Llaentenn (@kiedtl)
 
-IFS= read text
-echo "$text" | xclip -selection clipboard
+xclip -selection clipboard
