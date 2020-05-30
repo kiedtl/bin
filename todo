@@ -18,7 +18,7 @@ case "$1" in
     # new TODO
     [Nn]*)
         shift
-        echo "$@" > "$TODOFILE"
+        echo "$@" >> "$TODOFILE"
     ;;
 
     # remove TODO
