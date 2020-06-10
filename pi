@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+# pi [scale] - calculate pi to [scale] digits
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
+# See the COPYING file for copyright information.
+#
+# this uses the machin formula
+# pi = (4 * arctangent(1/5) - arctangent(1/239)) * 4
+
+echo "
+scale=${1:-10}
+(4 * a(1/5) - a(1/239)) * 4
+" | bc -ql
