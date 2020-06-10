@@ -38,6 +38,10 @@ case "$1" in
         cat "$TODOFILE" | squeeze > "$TODOFILE"
     ;;
 
+    [Ee]*)
+        "${VISUAL:-${EDITOR:-vi}}" "$TODOFILE"
+    ;;
+
     [Hh]*)
         printf 'todo [action]\n'
         printf 'actions:\n'
@@ -46,6 +50,7 @@ case "$1" in
         printf '    rm      remove todo\n'
         printf '    count   count todos\n'
         printf '    fix     fix todos\n'
+        printf '    edit    edit todo file\n'
     ;;
 
     *)
