@@ -8,9 +8,9 @@
 #  is found try to use ethernet)
 #
 
-for dev in wl eth enp ; do
+for dev in wl ens eth enp; do
     set -- "$(ip l | grep $dev)"
-    [ "$1" ] && break
+    [ -z "$1" ] || break
 done
 
 echo "$*" | \
