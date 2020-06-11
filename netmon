@@ -5,8 +5,8 @@
 # (c) Kiëd Llaentenn <kiedtl@tilde.team>
 # See the COPYING file for copyright information.
 
-tx_path=/sys/class/net/$(interface)/statistics/tx_bytes
-rx_path=/sys/class/net/$(interface)/statistics/rx_bytes
+tx_path=/sys/class/net/$(interface)/statistics/tx_packets #bytes
+rx_path=/sys/class/net/$(interface)/statistics/rx_packets #bytes
 
 while :; do
     sleep "${1:-1}"
@@ -15,7 +15,9 @@ while :; do
     read -r rx_cur < "$rx_path"
     cur=$((rx_cur+tx_cur))
 
-    dc -e "$cur ${last:-$cur} - p"
+    printf '%s,%s\n' \
+        "$(date +%s)" \
+        "$(dc -e "$cur ${last:-$cur} - p")"
 
     last=$cur
 done
