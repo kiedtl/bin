@@ -8,4 +8,4 @@
 command -v alacritty 2>/dev/null >&2 && \
     exec alacritty
 
-exec xterm
+exec urxvt
