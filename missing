@@ -25,26 +25,33 @@ chk awk sed grep pgrep file less
 chk exa fd rg tokei hyperfine dust
 
 # c programming
-chk gcc ld.lld make nvim git gdb scdoc
+chk gcc ld.lld make git gdb scdoc patch
 
 # other languages
-chk bash mksh tclsh dash
+chk bash mksh tclsh dash cargo
 
 # xorg
-chk awesome startx xterm dmenu slock polybar lemonbar \
-    xsel xmodmap xdotool xsetroot xrdb xprop xcompmgr xautolock
+if command -v X 2>/dev/null >&2
+then
+    chk startx xsel xmodmap xdotool xsetroot \
+        xrdb xprop xcompmgr xautolock
+
+    # xorg programs
+    chk mupdf feh 2bwm xterm dmenu slock polybar \
+        lemonbar
+fi
 
 # ricing
 chk wal paleta
 
 # programs
-chk mupdf netsurf feh taizen weechat convert
+chk taizen weechat convert nvim
 
 # networking
 chk ssh wpa_supplicant curl wget
 
 # monitoring
-chk htop pv
+chk ytop pv htop
 
 # misc
 chk xz bzip2 gzip unzip jq gfe lcharmap kjv

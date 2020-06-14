@@ -8,12 +8,9 @@
 
 shtat() {
     history 0 | \
-        awk '{ print $2 }' | \
         awk \
-            '/^\.\/.*/ {}
-
-            {
-                commands[$1]+=1
+            '{
+                commands[$2]+=1
                 total+=1
             }
 
