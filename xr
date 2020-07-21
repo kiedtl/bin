@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+# xr -- reload xrdb
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
+# See the COPYING file for copyright information.
+
+xrdb -merge ~/.Xresources
+xrdb -merge ~/.cache/wal/colors.Xresources
+xrdb -merge ~/.cache/wal/2bwm.Xresources

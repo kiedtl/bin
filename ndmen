@@ -12,7 +12,8 @@
 
 . ~/.cache/wal/colors.sh
 
-set -- $(dimensions) "$@"
+set -- $(res '$width $height') "$@"
+
 w=$(echo "$1 / 1.75" | bc)
 x=$(( $1 / 2 - $w / 2 ))
 y=$(( $2 / 5 ))
