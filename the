@@ -1,0 +1,58 @@
+#!/bin/mksh
+#
+# the - simple themes
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
+# See the COPYING file for copyright information.
+
+# pick a random palette
+colors=(~/etc/colors/palettes/*)
+
+if [ -z "$1" ]; then
+    picked="${colors[$((RANDOM%${#colors[@]}))]}"
+else
+    picked="$HOME/etc/colors/palettes/$1"
+    [ -f "$picked" ] || {
+        printf 'invalid colorscheme: "%s"\n' "$1"
+        exit 1;
+    }
+fi
+
+palette=($(cat $picked | tr '\n' ' '))
+
+printf 'using %s\n' "$(basename $picked)"
+
+# set the palette and color
+hsetroot -solid "#${palette[0]}"
+paleta <<< "$(tr ' ' '\n' <<< "${palette[@]}")"
+
+echo "
+{
+    \"wallpaper\": \"\",
+    \"alpha\": \"100\",
+    \"special\": {
+        \"background\": \"#${palette[1]}\",
+        \"foreground\": \"#${palette[0]}\",
+        \"cursor\": \"#${palette[2]}\"
+    },
+    \"colors\": {
+        \"color0\": \"#${palette[3]}\",
+        \"color1\": \"#${palette[4]}\",
+        \"color2\": \"#${palette[5]}\",
+        \"color3\": \"#${palette[6]}\",
+        \"color4\": \"#${palette[7]}\",
+        \"color5\": \"#${palette[8]}\",
+        \"color6\": \"#${palette[9]}\",
+        \"color7\": \"#${palette[10]}\",
+        \"color8\": \"#${palette[11]}\",
+        \"color9\": \"#${palette[12]}\",
+        \"color10\": \"#${palette[13]}\",
+        \"color11\": \"#${palette[14]}\",
+        \"color12\": \"#${palette[15]}\",
+        \"color13\": \"#${palette[16]}\",
+        \"color14\": \"#${palette[17]}\",
+        \"color15\": \"#${palette[18]}\"
+    }
+}
+" > /tmp/$$-the-wal-theme.json
+wal -q --theme /tmp/$$-the-wal-theme.json
+xr
