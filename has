@@ -1,0 +1,12 @@
+#!/bin/sh
+#
+# has - i can has command?
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
+# See the COPYING file for copyright information.
+
+if command -v "$1" 2>/dev/null >&2
+then
+    return 0
+else
+    return 1
+fi
