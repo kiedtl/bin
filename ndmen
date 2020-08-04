@@ -20,10 +20,10 @@ y=$(( $2 / 5 ))
 h=$(( $2 / 50 ))
 shift 2
 
-[ -z "$1" ] && p="/sbin/dmenu_path"
+[ -z "$1" ] && p="dmenu_path"
 [ -f "$1" ] && p="cat $1"
 
 [ -z "$2" ] && s="${SHELL:-"/bin/sh"}" \
 	|| s="cat"
 
-${p} | /sbin/dmenu -nb "$color0" -nf "$color7" -sb "$color7" -sf "$color0" -p ' > ' -fn 'ttyp0:size=12' -l "${4:-$h}" -x "${5:-$x}" -y "${6:-$y}" -wi "${3:-$w}" | "${s}" &
+${p} | dmenu -nb "$color0" -nf "$color7" -sb "$color7" -sf "$color0" -p ' > ' -fn 'fixed:size=12' -l "${4:-$h}" -x "${5:-$x}" -y "${6:-$y}" -wi "${3:-$w}" | "${s}" &
