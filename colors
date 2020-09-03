@@ -4,10 +4,26 @@
 # (c) Kiëd Llaentenn <kiedtl@tilde.team>
 # See the COPYING for copyright information.
 
-[ -f "$HOME/.cache/wal/colors" ] || \
+[ -f "$HOME/.cache/wal/colors.sh" ] || \
     exit 1
+. "$HOME/.cache/wal/colors.sh"
 
-cat $HOME/.cache/wal/colors | \
-    tr '\n' ' '
-
-printf '\n'
+printf "$foreground
+$background
+$cursor
+$color0
+$color1
+$color2
+$color3
+$color4
+$color5
+$color6
+$color7
+$color8
+$color9
+$color10
+$color11
+$color12
+$color13
+$color14
+$color15\n" | sed 's/#//g'

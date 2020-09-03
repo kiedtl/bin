@@ -1,0 +1,33 @@
+#!/bin/sh
+#
+# wfi - Connect to Wi-Fi
+# Create configuration with the following command:
+# wpa_passphrase NETWORK P@S$W0rD1234 | tee /etc/wpa_supplicant.conf
+# by Kied Llaentenn (@kiedtl)
+#
+# TODO: ethernet
+
+INTERFACE=$(interface)
+INTERFACE=${INTERFACE:-wlan0}
+
+dhcp() {
+    if has dhcpcd; then
+        dhcpcd
+    elif has udhcpc; then
+        udhcpc -i "$INTERFACE"
+    fi
+}
+
+wifi() {
+    pkill wpa_supplicant
+    pkill udhcpc
+    pkill dhcpcd
+
+    ip l set $INTERFACE up
+    wpa_supplicant -B \
+        -c /etc/wpa_supplicant/wpa_supplicant.conf \
+        -i $INTERFACE
+    dhcp
+}
+
+wifi "$@"

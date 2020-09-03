@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+# simple-colored - simple, colored.
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
+# See the COPYING file for copyright information.
+
+br="$(printf '\033[1;31m')"
+re="$(printf '\033[0m')"
+bo="$(printf '\033[1m')"
+
+echo "
+        )   (
+       (    )  )
+        )  (  (
+    │${re}          )   ${re}│  ${br}${USER}${re}@${br}$(hostname)${re}
+    │${br}▒▒▒▒▒▒▒▒▒▒▒▒▒▒${re}│  ${br}os      ${re}$(os) $(uname)
+  .-│${br}▒▒▒▒▒▒▒▒▒▒▒▒▒▒${re}│  ${br}shell   ${re}${SHELL##*/}
+ /  │${br}▒▒▒▒▒▒▒▒▒▒▒▒▒▒${re}│  ${br}kernel  ${re}$(uname -r)
+ \  │${br}▒▒▒▒▒▒▒▒▒▒▒▒▒▒${re}│  ${br}uptime  ${re}$(upt)
+  '-│${br}▒▒▒▒▒▒▒▒▒▒▒▒▒▒${re}│  ${br}pkgs    ${re}$(pkgs '$pkgs_total')
+    └──────────────┘  ${br}memory  ${re}$(mem)
+" 2>/dev/null
