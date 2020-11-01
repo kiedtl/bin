@@ -17,3 +17,12 @@ License
 
 - MIT License. Use these scripts however you please, but preserve the
   headers.
+
+
+TODO
+====
+
+- esc: emit VTE escape codes
+  usage: esc <CODE> [ARG]...
+  e.g.:  esc SETBG red
+- params: parse arguments
