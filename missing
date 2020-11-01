@@ -28,7 +28,7 @@ chk exa fd rg tokei hyperfine dust
 chk gcc ld.lld make git gdb scdoc patch
 
 # other languages
-chk bash mksh tclsh dash cargo
+chk bash mksh cargo
 
 # xorg
 if command -v X 2>/dev/null >&2
@@ -39,21 +39,21 @@ then
     # xorg programs
     chk mupdf feh 2bwm xterm dmenu slock polybar \
         lemonbar
+
+    # ricing
+    chk wal paleta
 fi
 
-# ricing
-chk wal paleta
-
 # programs
-chk taizen weechat convert nvim
+chk weechat convert nvim
 
 # networking
 chk ssh wpa_supplicant curl wget
 
 # monitoring
-chk ytop pv htop
+chk pv htop
 
 # misc
-chk xz bzip2 gzip unzip jq gfe lcharmap kjv
+chk xz bzip2 gzip unzip jq gfe lcharmap chue pesc
 
 printf '%s not found\n' "$missing"
