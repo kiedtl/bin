@@ -20,6 +20,7 @@ RUNE='ᚪᛒᚳᛞᛖᚠᚷᚻᛁᛄᚳᛚᛗᚾᚩᛈ?ᚱᛋᛏᚢ?ᚹ?ᚣ?'
 D_TH='ᚦ' D_AE='ᚫ' D_NG='ᛝ' D_ST='ᛥ'
 
 tr '[[:upper:]]' '[[:lower:]]' \
+    | sed 's|x|ks|' \
     | sed "s|th|$D_TH|" \
     | sed "s|ae|$D_AE|" \
     | sed "s|ng|$D_NG|" \
