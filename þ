@@ -1,0 +1,27 @@
+#!/bin/sh
+#
+# þ - rune-ify text
+#
+# ᚻᛖ ᚳᚹᚫᚦ ᚦᚫᛏ ᚻᛖ ᛒᚢᛞᛖ ᚩᚾ ᚦᚫᛗ ᛚᚪᚾᛞᛖ ᚾᚩᚱᚦᚹᛖᚪᚱᛞᚢᛗ ᚹᛁᚦ ᚦᚪ ᚹᛖᛥᚫ
+#
+# (Old English, which transcribed into Latin reads 'He cwaeth that he
+# bude thaem lande northweardum with tha Westsae.' and means 'He said
+# that he lived in the northern land near the Western Sea.')
+#
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
+# See the COPYING file for copyright information.
+#
+# NOTE: as far as I'm aware, there are no anglo-saxon runes
+# for k, q, v, x, and z. I simply substitute 'c' for 'k'.
+
+ALPH='abcdefghijklmnopqrstuvwxyz'
+RUNE='ᚪᛒᚳᛞᛖᚠᚷᚻᛁᛄᚳᛚᛗᚾᚩᛈ?ᚱᛋᛏᚢ?ᚹ?ᚣ?'
+
+D_TH='ᚦ' D_AE='ᚫ' D_NG='ᛝ' D_ST='ᛥ'
+
+tr '[[:upper:]]' '[[:lower:]]' \
+    | sed "s|th|$D_TH|" \
+    | sed "s|ae|$D_AE|" \
+    | sed "s|ng|$D_NG|" \
+    | sed "s|st|$D_ST|" \
+    | sed "y|$ALPH|$RUNE|"
