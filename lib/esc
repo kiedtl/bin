@@ -1,0 +1,41 @@
+#!/bin/sh
+#
+# esc - emit VTE escape sequences
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
+# See the COPYING file for copyright information.
+
+# this is a good reference, in my experience:
+# https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences
+
+. $(which std)
+
+[ -z "$1" ] && die "need argument"
+
+case "$1" in
+    # Cursor {Up, Down, Forward, Backward}
+    "CUU") printf '\033[%dA' "${2:-1}" ;;
+    "CUD") printf '\033[%dB' "${2:-1}" ;;
+    "CUF") printf '\033[%dC' "${2:-1}" ;;
+    "CUB") printf '\033[%dD' "${2:-1}" ;;
+
+    # Cursor {Next, Previous} Line
+    # moves cursor X lines down or up
+    "CNL") printf '\033[%dE' "${2:-1}" ;;
+    "CPL") printf '\033[%dF' "${2:-1}" ;;
+
+    # Cursor Horizontal Absolute Cursor, and
+    # Vertical Line Position Absolute Cursor
+    #
+    # move cursor to the nth position horizonally/vertically
+    "CHA") printf '\033[%dG' "${2:-1}" ;;
+    "VPA") printf '\033[%dG' "${2:-1}" ;;
+
+    # CUP: x y (Cursor position)
+    # move cursor to X column of Y line
+    # TODO: HVP: horizonal vertical position
+    "CUP") printf '\033[%d;%dH' "${2:?need Y}" "${3:?need X}" ;;
+
+    # DECSC/DECRC: save/restore cursor
+    "DECSC") printf '\033[s' ;;
+    "DECRC") printf '\033[u' ;;
+esac
