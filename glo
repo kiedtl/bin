@@ -12,13 +12,13 @@ width=34
 # use dc 'cause it's faster than bc :)
 foldwidth="$(echo "$ttywidth $width - p" | dc)"
 
-git log --format="%h %aE %s" | \
-    while read -r hash email subject
+git log --format="%as %h %aE %s" | \
+    while read -r date hash email subject
     do
         email="$(echo "$email" | tru 22)"
         subject="$(echo "$subject" | tru "$foldwidth")"
 
-        printf '\033[31m%s \033[0;1m%25s\033[m %s\n' \
-            "$hash" "<$email>" "$subject"
+        printf '\033[38m%s  \033[31m%s \033[0;1m%25s\033[m %s\n' \
+            "$date" "$hash" "<$email>" "$subject"
     done | \
     head -n"${1:-10}"

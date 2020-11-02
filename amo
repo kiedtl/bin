@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+# bin/amo - play among-sus on tilde.team!
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
+# See the COPYING file for copyright information.
+
+LOGS="$HOME/.local/share/among-sus/log-$(date +%Y-%m-%d).txt"
+
+if has rlwrap; then
+    rlwrap nc tilde.team 1234 | tee -a "$LOGS"
+else
+    nc tilde.team 1234 | tee -a "$LOGS"
+fi

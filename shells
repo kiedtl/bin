@@ -1,0 +1,27 @@
+#!/bin/sh
+#
+# shells: see who uses what shell
+# (c) Kiëd Llaentenn <kiedtl@protonmail.com>
+# See the COPYING file for copyright information.
+
+if [ "$1" = "--help" ]; then
+    printf "shells: see who uses what shell\n"
+    exit 0
+fi
+
+cat /etc/passwd | \
+    awk -F/ -v CONVFMT=%.2g '
+    {
+    if (/.*nologin.*|.*false.*|.*sync.*/)
+        printf ""
+    else
+        shells[$NF]+=1; total+=1
+    }
+
+    END {
+        for (sh in shells) {
+            p=(shells[sh]*100)/total
+            printf "%8s%% %-5s (%s)\n", p, sh, shells[sh]
+        }
+    }
+    ' | sort -bn

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+who | awk '{ print $1 }' | sort | uniq -c | sort -bnr
