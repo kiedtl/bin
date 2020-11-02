@@ -9,10 +9,12 @@ if has xbps-remove >/dev/null 2>&1; then
     rm -rf /var/cache/xbps/*
 fi
 
-[ -d ~/opt/.cargo ] && rm -rf ~/opt/.cargo
+[ -d ~/.cargo ] && rm -rf ~/.cargo/*
 [ -d ~/go ] && {
     for junk in $(find ~/go/pkg/*); do
         chmod 700 "$junk"
         rm -f "$junk" >&2 2>/dev/null
     done
 }
+[ -d ~/tmp ] && rm -rf ~/tmp/*
+[ -d ~/Downloads ] && rm -rf ~/Downloads
