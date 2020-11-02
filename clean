@@ -4,9 +4,15 @@
 # (c) Kied Llaentenn (@kiedtl)
 # See the COPYING for more information.
 
-if command -v xbps-remove >/dev/null 2>&1; then
+if has xbps-remove >/dev/null 2>&1; then
     xbps-remove -o
     rm -rf /var/cache/xbps/*
 fi
 
 [ -d ~/opt/.cargo ] && rm -rf ~/opt/.cargo
+[ -d ~/go ] && {
+    for junk in $(find ~/go/pkg/*); do
+        chmod 700 "$junk"
+        rm -f "$junk" >&2 2>/dev/null
+    done
+}
