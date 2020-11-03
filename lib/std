@@ -30,7 +30,7 @@ log() (
 # usage: die [text]
 #        die [<module> <text>]
 die() {
-    log "$1" "$2"
+    log "$1" "$2" "ERROR"
     exit 1
 }
 
