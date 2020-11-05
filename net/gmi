@@ -1,0 +1,20 @@
+#!/bin/sh
+#
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
+# See the COPYING file for copyright information.
+
+. $(which std)
+
+[ "$1" ] || die "need gemini url"
+
+url="$1"
+domain="${url##*://}" domain="${domain%%/*}"
+port=1965
+
+log "requesting gemini://$url from $domain"
+
+echo "gemini://$url" | \
+    openssl s_client -crlf -quiet \
+        -connect "$domain:$port" \
+        -servername "$domain" \
+        -no_ssl3 -no_tls1 -no_tls1_1
