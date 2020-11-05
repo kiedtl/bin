@@ -11,7 +11,7 @@ fi
 
 [ -d ~/.cargo ] && rm -rf ~/.cargo/*
 [ -d ~/go ] && {
-    for junk in $(find ~/go/pkg/*); do
+    for junk in $(find ~/go/pkg/* ~/go/src/*); do
         chmod 700 "$junk"
         rm -f "$junk" >&2 2>/dev/null
     done
