@@ -1,9 +1,9 @@
 #!/bin/sh
 
 # --- colors ---
-image=$(printf  "\033[0m")
-label=$(printf "\033[31m")
-reset=$(printf  "\033[0m")
+image=$(printf  "\033[m")
+label=$(printf "\033[1;34m")
+reset=$(printf  "\033[m")
 
 # --- display ---
 
@@ -11,7 +11,7 @@ ascii="
 ${image}┌──────────────────────┐
 ${image}│                      │
 ${image}│          ___         │
-${image}│         (.· |        │
+${image}│         (.. |        │
 ${image}│         (<> |        │
 ${image}│        / __  \       │
 ${image}│       ( /  \ /|      │
