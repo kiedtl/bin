@@ -1,12 +1,6 @@
 #!/bin/sh
 #
-# wttr - `curl wttr.in` wrapper
-# (c) Kied Llaentenn (@kiedtl)
-# See the COPYING for more information.
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
+# See the COPYING file for copyright information.
 
-main() {
-	curl wttr.in
-}
-
-main "$@"
-
+curl wttr.in/?0FAT
