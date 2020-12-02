@@ -22,7 +22,7 @@ palette=($(cat $picked | tr '\n' ' '))
 printf 'using %s\n' "$(basename $picked)"
 
 # set the palette and color
-hsetroot -solid "#${palette[0]}"
+hsetroot -solid "#${palette[1]}"
 paleta <<< "$(tr ' ' '\n' <<< "${palette[@]}")"
 
 echo "
@@ -56,3 +56,4 @@ echo "
 " > /tmp/$$-the-wal-theme.json
 wal -q --theme /tmp/$$-the-wal-theme.json
 xr
+pkill polybar && polybar -r bar
