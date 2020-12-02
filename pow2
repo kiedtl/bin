@@ -1,18 +1,12 @@
-#!/bin/csi -s
-#!
-#! pow2 - list powers of 2
-#! (c) Kied Llaentenn (@kiedtl)
-#! See the COPYING for more information.
+#!/bin/lua
+--
+-- pow2 - list powers of 2
+-- (c) Kied Llaentenn (@kiedtl)
+-- See the COPYING for more information.
 
-(import (chicken process-context))
+local function pow2(i, to)
+	print(("2^%d\t%d"):format(i, 2 ^ i))
+	if i < to then pow2(i + 1, to) end
+end
 
-(define (pow2 i to)
-    (display (string-append "2^" (number->string i) ": "
-        (number->string (expt 2 i))))
-    (newline)
-    (if (< i to) (pow2 (+ i 1) to)))
-
-(if (null? (command-line-arguments))
-    (pow2 1 10000)
-    (pow2 1 (string->number
-        (car (command-line-arguments)))))
+pow2(1, 20)
