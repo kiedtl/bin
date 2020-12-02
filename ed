@@ -4,10 +4,9 @@
 # (c) Kied Llaentenn (@kiedtl)
 # See the COPYING for more information.
 
-[ -d "$1" ] && {
-    printf "ed: cannot edit directory!!\n";
-    exit 1;
-}
+. $(which std)
+
+[ -d "$1" ] && die 'cannot edit directory'
 
 [ ! -f "$1" ] && {
     printf "ed: \"${1}\" doesn't exist -- create? [yN] ";
@@ -15,8 +14,8 @@
 
     case "$ans" in
         [Yy]*) touch "$1" ;;
-        *) ;;
+        *)     exit 1     ;;
     esac
 }
 
-[ -f "$1" ] && "$EDITOR" "$@"
+exec "$EDITOR" $@
