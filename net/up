@@ -20,8 +20,8 @@ OPTIONS:
 
 main() {
 	case "$1" in
-		f*) curl -F"file=@${2}" 0x0.st -i;; # post file
-		t*) cat "$2" | curl -iF 'f:1=<-' ix.io ;; # post text from file
+		f*) curl -F"file=@${2}" 0x0.st;; # post file
+		t*) cat "$2" | curl -F 'f:1=<-' ix.io ;; # post text from file
 		i*) curl -iF 'f:1=<-' ix.io ;; # stdin
 		 *) usage ;;
 	esac
