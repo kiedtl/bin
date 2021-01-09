@@ -5,13 +5,18 @@
 # See the COPYING for more information
 
 e="$(printf "\033")"
+t="Lorem \033[1mipsum."
 
 f256() {
     i=$1
 
     while [ $i -le 255 ]
     do
-        printf "${i}$e[4D$e[4C$e[48;5;${i}m$e[K$e[m\n"
+        printf "${i}$e[4D$e[4C"
+        printf "$e[38;5;${i}m $t $e[0m "
+        printf "$e[48;5;${i}m$e[30m $t $e[0m "
+        printf "$e[48;5;${i}m $t $e[0m "
+        printf "$e[48;5;${i}m$e[K$e[m\n"
         i=$(( i + 1 ))
     done
 }
