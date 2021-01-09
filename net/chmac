@@ -11,4 +11,4 @@ ip l set "${inter}" address "${1}"
 
 #ifconfig wlan0 down hw ether $1
 ip l set "${inter}" up
-wfi
+wifi
