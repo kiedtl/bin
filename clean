@@ -4,6 +4,9 @@
 # (c) Kied Llaentenn (@kiedtl)
 # See the COPYING for more information.
 
+find ~ -maxdepth 1 -type f -name '*history' -print0 | \
+    xargs -0 rm -f
+
 if has xbps-remove >/dev/null 2>&1; then
     xbps-remove -o
     rm -rf /var/cache/xbps/*
