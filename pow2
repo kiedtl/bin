@@ -5,8 +5,8 @@
 -- See the COPYING for more information.
 
 local function pow2(i, to)
-	print(("2^%d\t%d"):format(i, 2 ^ i))
+	print(("2^%d %10d"):format(i, 2 ^ i))
 	if i < to then pow2(i + 1, to) end
 end
 
-pow2(1, 20)
+pow2(1, 24)
