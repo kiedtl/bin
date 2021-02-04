@@ -26,6 +26,7 @@ shtat() {
             [ "$cmd" = "if" ]      && continue
             [ "$cmd" = "command" ] && continue
             [ "$cmd" = "exit" ]    && continue
+            [ "$cmd" = "." ]       && continue
 
             command -v -- "$cmd" 2>/dev/null >&2 || continue
 
