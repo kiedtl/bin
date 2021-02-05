@@ -19,4 +19,8 @@
     esac
 }
 
-[ -f "$1" ] && "$EDITOR" "$@"
+ed="${EDITOR:-nvim}"
+has $ed || ed="vim --clean"
+has $ed || ed="vi"
+
+[ -f "$1" ] && exec $ed "$@"
