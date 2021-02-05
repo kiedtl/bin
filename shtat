@@ -17,10 +17,23 @@ shtat() {
             END {
                 for (command in commands) {
                     percentage=(commands[command]*100)/total
-                    printf "%-5s %8s%%    %s\n", commands[command], percentage, command
+                    printf "%s,%s%%,%s\n", commands[command], percentage, command
                 }
             }' | \
+        while IFS=, read -r count perc cmd; do
+            [ "$cmd" = "while" ]   && continue
+            [ "$cmd" = "for" ]     && continue
+            [ "$cmd" = "if" ]      && continue
+            [ "$cmd" = "command" ] && continue
+            [ "$cmd" = "exit" ]    && continue
+            [ "$cmd" = "." ]       && continue
+
+            command -v -- "$cmd" 2>/dev/null >&2 || continue
+
+            grep -q / <<< "$cmd" && cmd="$(command -v -- "$cmd")"
+            printf '%-5s %13s    %s\n' "$count" "$perc" "$cmd"
+        done | \
         sort -bnr | \
         nl | \
-        head -n "${1:-5}"
+        head -n "${1:-8}"
 }

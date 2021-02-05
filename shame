@@ -1,0 +1,18 @@
+#!/bin/sh
+#
+# (c) Kiëd Llaentenn
+
+git log --format='%ae %H' --numstat $@ | \
+    awk '
+        NF == 2 { user=$1 }
+        NF == 3 { ins[user]+=$1; del[user]+=$2; }
+        END {
+            for (user in ins) {
+                tcon+=1;
+                tins+=ins[user]; tdel+=del[user];
+
+                printf("%s: %d insertions, %d deletions.\n",
+                    user, ins[user], del[user])
+            }
+        }' | \
+    column -t
