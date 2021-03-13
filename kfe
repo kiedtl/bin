@@ -1,46 +1,20 @@
 #!/bin/sh
+#
+# simple-colored - simple, colored.
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
+# See the COPYING file for copyright information.
 
-# --- colors ---
-image=$(printf  "\033[m")
-label=$(printf "\033[1;34m")
-reset=$(printf  "\033[m")
+br="$(printf '\033[1;34m')"
+re="$(printf '\033[0m')"
+bo="$(printf '\033[1m')"
 
-# --- display ---
-
-ascii="
-${image}┌──────────────────────┐
-${image}│                      │
-${image}│          ___         │
-${image}│         (.. |        │
-${image}│         (<> |        │
-${image}│        / __  \       │
-${image}│       ( /  \ /|      │
-${image}│      _/\ __)/_)      │
-${image}│      \/_____\/       │
-${image}│                      │
-${image}│                      │
-${image}└──────────────────────┘
-"
-
-echo "$ascii"
-
-print_info() {
-    [ -z "$2" ] && return
-
-    printf '%s%-8s%s%16s\n' "${label}" "$1" \
-        "${reset}" "$2"
-}
-
-get_info() {
-    print_info "USER"   "${USER}@$(hostname)"
-    print_info "OS"     "$(os)"
-    print_info "UPTIME" "$(upt)"
-    print_info "WM"     "$(wm)"
-    print_info "EDITOR" "neovim"
-    print_info "SHELL"  "${SHELL##*/}"
-    print_info "TEMP"   "$(temp)"
-    print_info "KERNEL" "$(uname -r)"
-}
-
-get_info 2>/dev/null
-16
+echo "
+┌───────────┐   ${br}${USER}${re}@${br}$(hostname)${re}
+│           │   ${br}os      ${re}$(os) $(uname)
+│  ┌─────┐  │   ${br}shell   ${re}${SHELL##*/}
+│  │ ·_· │  │   ${br}kernel  ${re}$(uname -r)
+│  └─────┘  │   ${br}uptime  ${re}$(upt)
+│ _     ___ │   ${br}pkgs    ${re}$(pkgs '$pkgs_total')
+└┬─────────┬┘   ${br}memory  ${re}$(mem)
+ └─────────┘
+" 2>/dev/null
