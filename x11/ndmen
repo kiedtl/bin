@@ -14,10 +14,10 @@
 
 set -- $(res '$width $height') "$@"
 
-w=$1	#w=$(echo "$1 / 1.75" | bc)
-x=0	#x=$(( $1 / 2 - $w / 2 ))
-	#y=$(( $2 / 5 ))
-	#h=$(( $2 / 50 ))
+w=$(echo "$1 / 1.92" | bc)
+x=$(( $1 / 2 - $w / 2 ))
+y=$(( $2 / 10 ))
+h=$(( $2 / 80 ))
 shift 2
 
 [ -z "$1" ] && p="dmenu_path"
@@ -26,6 +26,6 @@ shift 2
 [ -z "$2" ] && s="${SHELL:-"/bin/sh"}" \
 	|| s="cat"
 
-${p} | dmenu -nb "$color0" -nf "$color15" -sb "$color15" -sf "$color0" \
-	-p '$ ' -fn 'gomme:size=16' -l "${4:-$h}" -x "${5:-$x}" \
-	-y "${6:-$y}" -wi "${3:-$w}" | "${s}" &
+${p} | dmenu -nb "$color0" -nf "$color15" -sb "$color3" -sf "$color0" \
+	-p '' -fn 'kikon:size=16' -l "${h:-4}" -x "${x:-5}" \
+	-y "${y:-0}" -wi "${w:-3}" -F | "${s}" &
