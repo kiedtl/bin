@@ -14,7 +14,7 @@
 
 set -- $(res '$width $height') "$@"
 
-w=$(echo "$1 / 1.92" | bc)
+w=$(echo "$1 / 2.20" | bc)
 x=$(( $1 / 2 - $w / 2 ))
 y=$(( $2 / 10 ))
 h=$(( $2 / 80 ))
@@ -27,5 +27,5 @@ shift 2
 	|| s="cat"
 
 ${p} | dmenu -nb "$color0" -nf "$color15" -sb "$color3" -sf "$color0" \
-	-p '' -fn 'cursed:size=18' -l "${h:-4}" -x "${x:-5}" \
+	-p '' -fn 'cursed:size=16' -l "${h:-4}" -x "${x:-5}" \
 	-y "${y:-0}" -wi "${w:-3}" -F | "${s}" &
