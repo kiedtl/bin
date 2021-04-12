@@ -25,12 +25,12 @@ printf 'using %s\n' "$(basename $picked)"
 wallpaper=
 if [ "${palette[19]}" ]; then
     wallpaper="/home/kiedtl/img/wallpapers/${palette[19]}"
-    feh --bg-fill "${wallpaper}"
+    feh --bg-fill "${wallpaper}" &
 else
-    hsetroot -solid "#${palette[1]}"
+    hsetroot -solid "#${palette[1]}" &
 fi
 
-paleta <<< "$(tr ' ' '\n' <<< "${palette[@]}" | head -n16)"
+paleta <<< "$(tr ' ' '\n' <<< "${palette[@]}" | head -n16)" &
 
 echo "
 {
@@ -61,6 +61,6 @@ echo "
     }
 }
 " > /tmp/$$-the-wal-theme.json
-wal -q --theme /tmp/$$-the-wal-theme.json
-xr
-pkill polybar && polybar -r bar
+wal -qnst --theme /tmp/$$-the-wal-theme.json
+xr &
+pkill polybar && exec polybar -r bar

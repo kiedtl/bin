@@ -2,22 +2,22 @@
 #
 # ndmen: dmenu wrapper with better defaults
 # usage: ndmen [FILE] [SHELL] [W] [H] [X] [Y]
-#	FILE default: dmenu_path
-#	SHELL default: /bin/sh
-#	example:
-#	ndmen /etc/some_file_with_multiple_lines /bin/cat
+#       FILE  default: dmenu_path
+#       SHELL default: /bin/sh
+#    example:
+#       ndmen /etc/some_file /bin/cat
 #
 # (c) Kied Llaentenn
-# see the COPYING for more info.
+# see the COPYING file for more info.
 
 . ~/.cache/wal/colors.sh
 
 set -- $(res '$width $height') "$@"
 
-w=$(echo "$1 / 1.75" | bc)
+w=$(echo "$1 / 2.20" | bc)
 x=$(( $1 / 2 - $w / 2 ))
-y=$(( $2 / 5 ))
-h=$(( $2 / 50 ))
+y=$(( $2 / 10 ))
+h=$(( $2 / 80 ))
 shift 2
 
 [ -z "$1" ] && p="dmenu_path"
@@ -26,4 +26,6 @@ shift 2
 [ -z "$2" ] && s="${SHELL:-"/bin/sh"}" \
 	|| s="cat"
 
-${p} | dmenu -nb "$color0" -nf "$color7" -sb "$color7" -sf "$color0" -p ' > ' -fn 'ttyp0:size=13' -l "${4:-$h}" -x "${5:-$x}" -y "${6:-$y}" -wi "${3:-$w}" | "${s}" &
+${p} | dmenu -nb "$color0" -nf "$color15" -sb "$color3" -sf "$color0" \
+	-p '' -fn 'cursed:size=16' -l "${h:-4}" -x "${x:-5}" \
+	-y "${y:-0}" -wi "${w:-3}" -F | "${s}" &
