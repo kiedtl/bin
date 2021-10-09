@@ -30,5 +30,5 @@ define calc_e(iters, accm) {
 }
 
 scale=${2:-10}
-1 + calc_e(${1:-10}, 0)
+1 + calc_e(${1:-20}, 0)
 " | bc -ql
