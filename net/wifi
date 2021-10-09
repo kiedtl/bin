@@ -12,21 +12,18 @@ INTERFACE=${INTERFACE:-wlan0}
 
 dhcp() {
     if has dhcpcd; then
-        dhcpcd
+        pkill dhcpcd ; dhcpcd
     elif has udhcpc; then
-        udhcpc -i "$INTERFACE"
+        pkill udhcpc ; udhcpc -i "$INTERFACE"
     fi
 }
 
 wifi() {
-    pkill wpa_supplicant
-    pkill udhcpc
-    pkill dhcpcd
-
     ip l set $INTERFACE up
-    wpa_supplicant -B \
+    pkill wpa_supplicant ; wpa_supplicant -B \
         -c /etc/wpa_supplicant/wpa_supplicant.conf \
         -i $INTERFACE
+    sleep 1
     dhcp
 }
 
