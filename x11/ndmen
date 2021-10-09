@@ -12,13 +12,13 @@
 
 . ~/.cache/wal/colors.sh
 
-set -- $(res '$width $height') "$@"
+#set -- $(res '$width $height') "$@"
 
-w=$(echo "$1 / 2.20" | bc)
-x=$(( $1 / 2 - $w / 2 ))
-y=$(( $2 / 10 ))
-h=$(( $2 / 80 ))
-shift 2
+#w=$(echo "scale=0; $1 / 2.20" | bc)
+#x=$(( $1 / 2 - $w / 2 ))
+#y=$(( $2 / 10 ))
+#h=$(( $2 / 80 ))
+#shift 2
 
 [ -z "$1" ] && p="dmenu_path"
 [ -f "$1" ] && p="cat $1"
@@ -26,6 +26,9 @@ shift 2
 [ -z "$2" ] && s="${SHELL:-"/bin/sh"}" \
 	|| s="cat"
 
+#${p} | dmenu -nb "$color0" -nf "$color15" -sb "$color3" -sf "$color0" \
+#	-p '' -fn 'cursed:size=16' -l "${h:-4}" -x "${x:-5}" \
+#	-y "${y:-0}" -wi "${w:-3}" -F | "${s}" &
+
 ${p} | dmenu -nb "$color0" -nf "$color15" -sb "$color3" -sf "$color0" \
-	-p '' -fn 'cursed:size=16' -l "${h:-4}" -x "${x:-5}" \
-	-y "${y:-0}" -wi "${w:-3}" -F | "${s}" &
+	-p '' -fn 'cursed:size=16' | "${s}" &
