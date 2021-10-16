@@ -7,3 +7,4 @@
 xrdb -merge ~/.Xresources
 xrdb -merge ~/.cache/wal/colors.Xresources
 xrdb -merge ~/.cache/wal/2bwm.Xresources
+xrdb -merge ~/.cache/wal/polybar.Xresources
