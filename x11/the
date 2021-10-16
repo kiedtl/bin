@@ -4,18 +4,19 @@
 # (c) Kiëd Llaentenn <kiedtl@tilde.team>
 # See the COPYING file for copyright information.
 
-# pick a random palette
-colors=(~/etc/colors/palettes/*)
-
 if [ -z "$1" ]; then
-    picked="${colors[$((RANDOM%${#colors[@]}))]}"
-else
-    picked="$HOME/etc/colors/palettes/$1"
-    [ -f "$picked" ] || {
-        printf 'invalid colorscheme: "%s"\n' "$1"
-        exit 1;
-    }
+    # pick a random palette
+    #colors=(~/etc/colors/palettes/*)
+    #picked="${colors[$((RANDOM%${#colors[@]}))]}"
+    n=$(ls ~/etc/colors/palettes/ | ndmen 'cat -' cat)
+    set -- "$1"
 fi
+
+picked="$HOME/etc/colors/palettes/$1"
+[ -f "$picked" ] || {
+    printf 'invalid colorscheme: "%s"\n' "$1"
+    exit 1;
+}
 
 palette=($(cat $picked | tr '\n' ' '))
 
@@ -62,5 +63,5 @@ echo "
 }
 " > /tmp/$$-the-wal-theme.json
 wal -qnst --theme /tmp/$$-the-wal-theme.json
-xr &
-pkill polybar && exec polybar -r bar
+xr
+pkill polybar && polybar -r bar & 2>&1 >/dev/null
