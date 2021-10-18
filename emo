@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+# emo - copy emoticons or whatever these things are called
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
+# See the COPYING file for copyright information.
+
+list="
+shrug		¯\_(ツ)_/¯
+"
+echo $list > /tmp/$$-emo
+ndmen "cat /tmp/$$-emo" cat | cut -d' ' -f2- | tr -d '\n' | xsel -nib
