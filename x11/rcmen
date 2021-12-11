@@ -11,13 +11,8 @@
 
 . ~/.cache/wal/colors.sh
 
-get_id_interactive() {
-    xid=`xwininfo | grep 'Window id: '`
-    echo ${xid} | cut -d':' -f3 | cut -d' ' -f2
-}
-
-resize() {
-    id=`get_id_interactive`
+reshape() {
+    id=$(xdotool selectwindow)
     #eval $(crud)
     read -r W H X Y <<< $(xrectsel '%w %h %x %y')
 
@@ -26,35 +21,38 @@ resize() {
 }
 
 move() {
-	id=$(get_id_interactive)
-	read -r W H X Y <<< $(xrectsel '%w %h %x %y')
+	id=$(xdotool getactivewindow)
+	read -r _id oX oY oW oH <<< $(xdotool getwindowgeometry $id | \
+		awk '{ print $2 }' | tr '\n,x' '   ')
+	read -r X Y _ _ <<< $(xrectmov $oX $oY $oW $oH)
 
 	xdotool windowmove ${id} ${X} ${Y}
 }
 
 new() {
     fw=9	# width of term font
-    fh=15	# height of term font
-    ib=16	# size of term inner border
-    ob=4	# size of term windows WM border
+    fh=18	# height of term font
+    ib=24	# size of term inner border
+    ob=3	# size of term windows WM border
 
     read -r W H X Y <<< $(xrectsel '%w %h %x %y') 
     w=$(( ( W - (ib + ob)*2 ) / fw ))
     h=$(( ( H - (ib + ob)*2 ) / fh )) 
     
-    xterm -title terminal -geometry "${w}x${h}+${X}+${Y}"
+    [ "$W" ] && st -g "${w}x${h}+${X}+${Y}"
 }
 
 delete() {
-    id=`get_id_interactive`
+    id=$(xdotool selectwindow)
     xdotool windowclose ${id}
 }
 
 spawn() {
-    eval $(xdotool getmouselocation --shell)
-    9menu -geometry 100x100+${X}+${Y} -popup \
-	  -bg "$color7" -fg "$color0" \
-          'new: echo new' 'delete: echo delete' 'move: echo move' 'resize: echo resize'
+    #eval $(xdotool getmouselocation --shell)
+    #9menu -geometry 10x10+24+47 -popup -warp \
+	  #-bg "$color0" -fg "$color15" \
+          #'new: echo new' 'delete: echo delete' 'move: echo move' 'resize: echo resize'
+    ndmen 'echo -e new\nmove\nreshape\ndelete' 'cat'
 }
 
 $(spawn)
