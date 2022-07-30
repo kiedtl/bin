@@ -64,4 +64,6 @@ echo "
 " > /tmp/$$-the-wal-theme.json
 wal -qnst --theme /tmp/$$-the-wal-theme.json
 xr
-pkill polybar && polybar -r bar & 2>&1 >/dev/null
+pkill polybar
+polybar -r top    &
+polybar -r bottom &

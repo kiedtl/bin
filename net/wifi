@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/mksh
 #
 # wfi - Connect to Wi-Fi
 # Create configuration with the following command:
@@ -12,15 +12,15 @@ INTERFACE=${INTERFACE:-wlan0}
 
 dhcp() {
     if has dhcpcd; then
-        pkill dhcpcd ; dhcpcd
+        doas pkill dhcpcd ; doas dhcpcd
     elif has udhcpc; then
-        pkill udhcpc ; udhcpc -i "$INTERFACE"
+        doas pkill udhcpc ; doas udhcpc -i "$INTERFACE"
     fi
 }
 
 wifi() {
-    ip l set $INTERFACE up
-    pkill wpa_supplicant ; wpa_supplicant -B \
+    doas ip l set $INTERFACE up
+    doas pkill wpa_supplicant ; doas wpa_supplicant -B \
         -c /etc/wpa_supplicant/wpa_supplicant.conf \
         -i $INTERFACE
     sleep 1
