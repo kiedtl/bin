@@ -1,0 +1,53 @@
+#!/bin/mksh
+#
+# zn -- create a new note
+#
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
+# See the COPYING file for copyright information.
+
+DIR=$HOME/doc/zet/
+
+. $(which std)
+export FZF_DEFAULT_OPTS="--color pointer:red --color bg+:bright-black"
+
+printf 'Title: '
+title=
+read -r title
+
+id=$(printf '%s' "$title" | \
+    tr -d "\"'.,!:;+=@#$%&*\`~\\/()[]{}|" | \
+    tr '[:upper:]' '[:lower:]' | \
+    sed 's/ /-/g' | \
+    head -c32)
+fname="${id}.md"
+path="$DIR/$fname"
+[ -f "$path" ] && die "$fname already exists"
+printf "Creating '%s'\n" "$fname"
+
+tags=$()
+
+tags=
+while :
+do
+    prompt="Tags: "
+    [ -z "$tags" ] || prompt="Tags (${tags/ /}): "
+
+    taglist="$(rg -I '[\^ ]#[a-z]+' $HOME/doc/zet/ | tr ' ' '\n' | tr -d '#' | sort -u)"
+    fzfout="$(fzf --bind=enter:replace-query+print-query --reverse --prompt="$prompt" <<< "$taglist")"
+    [ $? = 130 ] && break
+    tags="$tags #$(tr -d '\n' <<< "$fzfout")"
+done
+
+tags="${tags/ /}" # remove leading space
+printf "Tags: %s\n" "$tags"
+
+touch "$path"
+printf "%s\n" "$title"                 >> "$path"
+printf "%s\n" "$title" | sed 's/./=/g' >> "$path"
+printf "\n"                            >> "$path"
+date "+%B %d, %Y"                      >> "$path"
+printf "\n"                            >> "$path"
+printf "%s\n" "$tags"                  >> "$path"
+printf "\n"                            >> "$path"
+
+ed "$path"
