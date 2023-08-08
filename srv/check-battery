@@ -1,0 +1,21 @@
+#!/bin/sh
+#
+# check-battery - Check battery levels and hibernate or warn user (via herbe)
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
+# See the COPYING file for copyright information.
+
+acpi -b | awk -F'[,:%]' '{print $2, $3}' | {
+    read -r status capacity
+
+    if [ "$status" = Discharging -a "$capacity" -lt 2 ]; then
+        herbe "Critical battery level (2%), hibernating. Zzz..."
+        sudo ZZZ
+        herbe "...yawn"
+    elif [ "$status" = Discharging -a "$capacity" -lt 3 ]; then
+        herbe "Critical battery level (3%)."
+    elif [ "$status" = Discharging -a "$capacity" -lt 5 ]; then
+        herbe "Battery low (5%)."
+    elif [ "$status" = Discharging -a "$capacity" -lt 10 ]; then
+        herbe "Battery low (10%)."
+    fi
+}
