@@ -31,7 +31,7 @@ else
     hsetroot -solid "#${palette[1]}" &
 fi
 
-paleta <<< "$(tr ' ' '\n' <<< "${palette[@]}" | head -n16)" &
+paleta <<< "$(tr ' ' '\n' <<< "${palette[@]}" | head -n19)" &
 
 echo "
 {
@@ -64,6 +64,6 @@ echo "
 " > /tmp/$$-the-wal-theme.json
 wal -qnst --theme /tmp/$$-the-wal-theme.json
 xr
-pkill polybar
+pkill -9 polybar # somehow the bottom bar stays alive w/o -9
 polybar -r top    &
 polybar -r bottom &
