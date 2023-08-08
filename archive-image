@@ -1,0 +1,77 @@
+#!/bin/mksh
+#
+# vim: filetype=bash
+#
+# archive-image: archive a tumblr (and soon, reddit/unsplash/twitter) image post
+#
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
+# See the COPYING file for copyright information.
+
+set -e
+. $(which std)
+
+T_HELPER=$HOME/bin/lib/tumbler_helper.py
+ARCHIVE_DIR=$HOME/arc/art/
+
+if [ "$1" = "" ]
+then
+	die "usage: $0 <url>"
+fi
+
+url=$1
+
+if grep -q 'tumblr' <<< "$url"
+then
+	IFS='/' read _ blog id <<< $(grep -oEi 'tumblr\.com/[a-zA-Z0-9]+/[0-9]+' <<< "$1")
+	
+	consumer_key="AFVyAQ9OS7urVp57OtpufMcQJK3pGlV4NcslhXORnK5kBzvt2F"
+	consumer_key_secret="BzPIqaZJAzcjlrMIbkWMjPtCecedFLAhDU7j9XGrabgz8Y2bXv"
+	read oauth oauth_secret < .ssh/tumblr.secrets
+	
+	response=$(python3 $T_HELPER $consumer_key $consumer_key_secret $oauth $oauth_secret $blog $id)
+	
+	content_image=$(printf '%s' "$response" | \
+		jq '.content | .[] | .media | .[0] | select(.url != null) | .url' | \
+		tr -d '"' | tr '\n' ' ')
+	content_text=$(printf '%s' "$response" | \
+		jq '.content | .[] | .text | select(. != null)' | \
+		tr -d '"')
+	content_slug=$(printf '%s' "$response" | jq '.slug' | tr -d '"')
+	content_surl=$(printf '%s' "$response" | jq '.short_url' | tr -d '"')
+	content_summ=$(printf '%s' "$response" | jq '.summary' | tr -d '"')
+	content_tags=$(printf '%s' "$response" | jq '.tags | .[]' | tr -d '"' | tr '\n' ' ')
+	
+	read -r main_tag_guess _ <<< "$content_tags"
+	
+	filelist=""
+	ctr=0
+	for i in $content_image
+	do
+		ctr=$((ctr+1))
+		filename="/tmp/tumblr-$id-${ctr}.png"
+		filelist="$filelist ${filename}"
+		wget $i -O $filename
+	done
+	
+	filename=/tmp/tumblr-$id-combined.png
+	rm -f $filename
+	convert -append $filelist $filename
+	rm -f $filelist
+	
+	# This needs to be UCS2 encoded...
+	#exiftool -XPTitle="$content_summary" $filename
+	#exiftool -XPAuthor=$blog $filename
+	#exiftool -XPKeywords="$content_tags" $filename
+
+	exiftool -Artist=$blog $filename
+	exiftool -ImageDescription="$content_text" $filename
+	exiftool -ImageSourceData="$content_surl" $filename
+	exiftool -UserComment="$content_tags" $filename
+	exiftool -DateTime="$(date +%Y-%m-%d)" $filename
+	
+	# Just in case it wasn't a png to begin with
+	convert $filename "${ARCHIVE_DIR}/${content_slug}.png"
+elif grep -q 'reddit' <<< "$url"
+then
+	die "Reddit archival unimplemented"
+fi
