@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
+# See the COPYING file for copyright information.
+
+. $HOME/.cache/wal/colors.sh
+exec tabbed -U $color0 -u $color1 -O $color0 alacritty --embed
