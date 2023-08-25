@@ -18,9 +18,15 @@ OPTIONS:
 "
 }
 
+upload() {
+    output=$(curl -s -F"file=@${1}" 0x0.st)
+    qrencode -m 2 -s 2 -t ansiutf8 -o - "$output"
+    printf '%s\n' "$output"
+}
+
 main() {
 	case "$1" in
-		f*) curl -F"file=@${2}" 0x0.st;; # post file
+		f*) upload "$2" ;; # post file
 		t*) cat "$2" | curl -F 'f:1=<-' ix.io ;; # post text from file
 		i*) curl -iF 'f:1=<-' ix.io ;; # stdin
 		 *) usage ;;
