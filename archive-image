@@ -7,6 +7,27 @@
 # (c) Kiëd Llaentenn <kiedtl@tilde.team>
 # See the COPYING file for copyright information.
 
+setexif() {
+	blog=$1
+	content_text=$2
+	content_surl=$3
+	content_tags=$4
+	archive_date=$5
+	filename=$6
+	echo $filename
+
+	# This needs to be UCS2 encoded...
+	#exiftool -XPTitle="$content_summary" $filename
+	#exiftool -XPAuthor=$blog $filename
+	#exiftool -XPKeywords="$content_tags" $filename
+
+	exiftool -Artist=$blog $filename
+	exiftool -ImageDescription="$content_text" $filename
+	exiftool -ImageSourceData="$content_surl" $filename
+	exiftool -UserComment="$content_tags" $filename
+	exiftool -DateTime="$archive_date" $filename
+}
+
 set -e
 . $(which std)
 
@@ -22,14 +43,15 @@ url=$1
 
 if grep -q 'tumblr' <<< "$url"
 then
-	IFS='/' read _ blog id <<< $(grep -oEi 'tumblr\.com/[a-zA-Z0-9]+/[0-9]+' <<< "$1")
-	
+	IFS='/' read _ blog id <<< $(grep -oEi 'tumblr\.com/[a-zA-Z0-9_\-]+/[0-9]+' <<< "$url")
+	printf 'Archiving %d from %s\n' "$id" "$blog"
+
 	consumer_key="AFVyAQ9OS7urVp57OtpufMcQJK3pGlV4NcslhXORnK5kBzvt2F"
 	consumer_key_secret="BzPIqaZJAzcjlrMIbkWMjPtCecedFLAhDU7j9XGrabgz8Y2bXv"
-	read oauth oauth_secret < .ssh/tumblr.secrets
-	
+	read oauth oauth_secret < $HOME/.ssh/tumblr.secrets
+
 	response=$(python3 $T_HELPER $consumer_key $consumer_key_secret $oauth $oauth_secret $blog $id)
-	
+
 	content_image=$(printf '%s' "$response" | \
 		jq '.content | .[] | .media | .[0] | select(.url != null) | .url' | \
 		tr -d '"' | tr '\n' ' ')
@@ -40,37 +62,46 @@ then
 	content_surl=$(printf '%s' "$response" | jq '.short_url' | tr -d '"')
 	content_summ=$(printf '%s' "$response" | jq '.summary' | tr -d '"')
 	content_tags=$(printf '%s' "$response" | jq '.tags | .[]' | tr -d '"' | tr '\n' ' ')
-	
+
 	read -r main_tag_guess _ <<< "$content_tags"
-	
+
 	filelist=""
+	ext="png"
 	ctr=0
 	for i in $content_image
 	do
+		rm -f /tmp/archive-image-tmp-file
+		wget $i -O /tmp/archive-image-tmp-file
+		IPA=" ," read -r _ ext <<< $(file --extension /tmp/archive-image-tmp-file)
 		ctr=$((ctr+1))
-		filename="/tmp/tumblr-$id-${ctr}.png"
+		filename="/tmp/tumblr-$id-${ctr}.${ext}"
 		filelist="$filelist ${filename}"
-		wget $i -O $filename
+		mv /tmp/archive-image-tmp-file $filename
 	done
-	
-	filename=/tmp/tumblr-$id-combined.png
-	rm -f $filename
-	convert -append $filelist $filename
-	rm -f $filelist
-	
-	# This needs to be UCS2 encoded...
-	#exiftool -XPTitle="$content_summary" $filename
-	#exiftool -XPAuthor=$blog $filename
-	#exiftool -XPKeywords="$content_tags" $filename
 
-	exiftool -Artist=$blog $filename
-	exiftool -ImageDescription="$content_text" $filename
-	exiftool -ImageSourceData="$content_surl" $filename
-	exiftool -UserComment="$content_tags" $filename
-	exiftool -DateTime="$(date +%Y-%m-%d)" $filename
-	
-	# Just in case it wasn't a png to begin with
-	convert $filename "${ARCHIVE_DIR}/${content_slug}.png"
+	if [ "$ext" == "gif" ] && [ "$ctr" -gt 1 ]
+	then
+		ctr2=0
+		for i in $filelist
+		do
+			setexif "$blog" "$content_text" "$content_surl" "$content_tags" "$(date +%Y-%m-%d)" $i
+			mv $i "${ARCHIVE_DIR}/${content_slug}-${ctr2}.${ext}"
+			ctr2=$((ctr2+1))
+		done
+	else
+		filename=/tmp/tumblr-$id-combined.${ext}
+		rm -f $filename
+		if [ $ctr -gt 1 ]
+		then
+			convert -append $filelist $filename
+		else
+			mv $filelist $filename
+		fi
+		rm -f $filelist
+
+		setexif "$blog" "$content_text" "$content_surl" "$content_tags" "$(date +%Y-%m-%d)" $filename
+		mv $filename "${ARCHIVE_DIR}/${content_slug}.${ext}"
+	fi
 elif grep -q 'reddit' <<< "$url"
 then
 	die "Reddit archival unimplemented"
