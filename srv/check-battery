@@ -4,7 +4,15 @@
 # (c) Kiëd Llaentenn <kiedtl@tilde.team>
 # See the COPYING file for copyright information.
 
-acpi -b | awk -F'[,:%]' '{print $2, $3}' | {
+make_notif_once() {
+    mkdir -p /tmp/check_battery/
+    cachename=/tmp/check_battery/$1-$(date +%H)
+    [ -f $cachename ] && return
+    touch $cachename
+    herbe "$2"
+}
+
+acpi -b | grep -v unavailable | awk -F'[,:%]' '{print $2, $3}' | {
     read -r status capacity
 
     if [ "$status" = Discharging -a "$capacity" -lt 2 ]; then
@@ -12,10 +20,10 @@ acpi -b | awk -F'[,:%]' '{print $2, $3}' | {
         sudo ZZZ
         herbe "...yawn"
     elif [ "$status" = Discharging -a "$capacity" -lt 3 ]; then
-        herbe "Critical battery level (3%)."
+        make_notif_once 3 "Critical battery level (<3%)."
     elif [ "$status" = Discharging -a "$capacity" -lt 5 ]; then
-        herbe "Battery low (5%)."
+        make_notif_once 5 "Battery low (<5%)."
     elif [ "$status" = Discharging -a "$capacity" -lt 10 ]; then
-        herbe "Battery low (10%)."
+        make_notif_once 10 "Battery low (<10%)."
     fi
 }
