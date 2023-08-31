@@ -28,6 +28,6 @@ p="$1"
 
 exec ${p} | dmenu \
 	-nb "$color0" -nf "$color15" -sb "$color15" -sf "$color0" \
-	-p '' -fn 'cursed:size=16' -l "${h:-4}" -x "${x:-5}" \
+	-p "$NDMEN_PROMPT" -fn 'cursed:size=16' -l "${h:-4}" -x "${x:-5}" \
 	-shf "$color8" -shb "$color15" -nhb "$color8" -nhf "$color15" \
 	-y "${y:-0}" -wi "${w:-3}" -F | "${s}"

@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+# powermenu - sleep/reboot/etc menu with dmenu
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
+# See the COPYING file for copyright information.
+
+. $(which std)
+INTERFACE=$(interface)
+
+chosen=$(echo "login\nsleep\nhibernate\nhalt\nreboot" | ndmen 'cat -' 'cat' || exit 1)
+[ -z "$chosen" ] && exit 0
+
+confirm=$(echo "yes\nno" | NDMEN_PROMPT="Confirm $chosen " ndmen 'cat -' 'cat' || exit 1)
+[ "$confirm" = "no" ] && exit 0
+
+case "$chosen" in
+    lock) i3lock-fancy -pf Fira-Code-Regular ;;
+    sleep) sudo zzz ;;
+    hibernate) sudo ZZZ ;;
+    halt) sudo halt ;;
+    reboot) sudo reboot ;;
+esac

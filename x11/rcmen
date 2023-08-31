@@ -12,6 +12,7 @@
 . ~/.cache/wal/colors.sh
 
 reshape() {
+    sleep 0.2
     id=$(xdotool selectwindow)
     #eval $(crud)
     read -r W H X Y <<< $(xrectsel '%w %h %x %y')
@@ -21,25 +22,39 @@ reshape() {
 }
 
 move() {
-	id=$(xdotool getactivewindow)
+    sleep 0.2
+	id=$(xdotool selectwindow)
 	read -r _id oX oY oW oH <<< $(xdotool getwindowgeometry $id | \
 		awk '{ print $2 }' | tr '\n,x' '   ')
+    xdotool mousemove -w $id $((oW/2)) $((oH/2))
 	read -r X Y _ _ <<< $(xrectmov $oX $oY $oW $oH)
 
 	xdotool windowmove ${id} ${X} ${Y}
 }
 
 new() {
-    fw=9	# width of term font
-    fh=18	# height of term font
-    ib=24	# size of term inner border
-    ob=3	# size of term windows WM border
+    #fw=12	# width of term font
+    #fh=21	# height of term font
+    #ib=16	# size of term inner border
+    #ob=3	# size of term windows WM border
 
     read -r W H X Y <<< $(xrectsel '%w %h %x %y') 
-    w=$(( ( W - (ib + ob)*2 ) / fw ))
-    h=$(( ( H - (ib + ob)*2 ) / fh )) 
-    
-    [ "$W" ] && st -g "${w}x${h}+${X}+${Y}"
+    #w=$(( ( W - (ib + ob)*2 ) / fw ))
+    #h=$(( ( H - (ib + ob)*2 ) / fh )) 
+
+    #[ "$W" ] && st -g "${w}x${h}+${X}+${Y}"
+    [ "$W" ] || exit 0
+
+    # damn you alacritty, why not just accept a -geometry option
+    # (and no, "-o window.position..." doesn't work, I've tried.
+    alacritty \
+        -o "window.position.x = ${X}" \
+        -o "window.position.y = ${Y}" &
+    sleep 0.2
+    read -r _ pid _ <<< $(jobs -l | grep alacritty)
+    windowid=$(xdotool search --pid $pid)
+    sleep 0.2
+    xdotool windowsize $windowid $W $H
 }
 
 delete() {
