@@ -1,0 +1,21 @@
+#!/usr/bin/lua
+--
+-- arvelie - calculate date in arvelie format
+-- (c) Kiëd Llaentenn <kiedtl@tilde.team>
+-- See the COPYING file for copyright information.
+
+local date = os.date("*t")
+local absday = date.yday
+
+if date.year < 2000 then
+    print("ye olde days")
+    return
+end
+
+local y = date.year - 2000
+local m_ind = math.floor((absday / 14) + 0.5) + 1
+local m = ("ABCDEFGHIJKLMNOPQRSTUVWXYZ"):sub(m_ind, m_ind)
+local d = absday % 14
+local dstr = ("%02d%s%02d"):format(y, m, d)
+
+print(dstr)
