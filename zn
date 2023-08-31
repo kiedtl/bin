@@ -1,6 +1,7 @@
 #!/bin/mksh
 #
 # zn -- create a new note
+# Usage: just type 'zn'
 #
 # (c) Kiëd Llaentenn <kiedtl@tilde.team>
 # See the COPYING file for copyright information.
