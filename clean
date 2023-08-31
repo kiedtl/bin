@@ -20,4 +20,4 @@ fi
     done
 }
 [ -d ~/tmp ] && rm -rf ~/tmp/*
-[ -d ~/Downloads ] && rm -rf ~/Downloads
+[ -d ~/Downloads ] && rm -rf ~/Downloads/*
