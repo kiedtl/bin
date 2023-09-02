@@ -9,7 +9,7 @@ if [ -z "$1" ]; then
     #colors=(~/etc/colors/palettes/*)
     #picked="${colors[$((RANDOM%${#colors[@]}))]}"
     n=$(ls ~/etc/colors/palettes/ | ndmen 'cat -' cat)
-    set -- "$1"
+    set -- "$n"
 fi
 
 picked="$HOME/etc/colors/palettes/$1"

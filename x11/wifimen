@@ -8,7 +8,7 @@
 INTERFACE=$(interface)
 
 get_ssid_list() {
-    wpa_cli list_networks | tr '\t' ':' | cut -d: -f1,2,4 | \
+    sudo wpa_cli list_networks | tr '\t' ':' | cut -d: -f1,2,4 | \
         grep -Ev '(network id)|(Selected)' | \
         sed -e 's/\[CURRENT]/(current)/' -e 's/\[DISABLED]//' | \
         column -s: -to"            "
@@ -19,14 +19,14 @@ choose_ssid() {
 }
 
 pgrep wpa_supplicant >/dev/null || (
-    d sv restart wpa_supplicant || (
+    sudo d sv restart wpa_supplicant || (
         herbe "wifimen: could not start wpa_supplicant"
         exit 1
     )
 )
 
 pgrep dhcpcd >/dev/null || (
-    d sv restart dhcpcd || (
+    sudo d sv restart dhcpcd || (
         herbe "wifimen: could not start dhcpcd"
         exit 1
     )
@@ -48,8 +48,8 @@ fi
 
 chosen=$(echo "$option_a\n$option_b\n$option_c" | ndmen 'cat -' 'cat' || exit 1)
 case "$chosen" in
-    select) wpa_cli select_network $(choose_ssid || exit 1) ;;
-    disconnect) wpa_cli disconnect ;;
-    reconnect) wpi_cli reconnect ;;
-    reassociate) wpi_cli reassociate ;;
+    select) sudo wpa_cli select_network $(choose_ssid || exit 1) ;;
+    disconnect) sudo wpa_cli disconnect ;;
+    reconnect) sudo wpi_cli reconnect ;;
+    reassociate) sudo wpi_cli reassociate ;;
 esac

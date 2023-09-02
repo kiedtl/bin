@@ -38,6 +38,7 @@ new() {
     #ib=16	# size of term inner border
     #ob=3	# size of term windows WM border
 
+    sleep 0.2
     read -r W H X Y <<< $(xrectsel '%w %h %x %y') 
     #w=$(( ( W - (ib + ob)*2 ) / fw ))
     #h=$(( ( H - (ib + ob)*2 ) / fh )) 
@@ -58,6 +59,7 @@ new() {
 }
 
 delete() {
+    sleep 0.2
     id=$(xdotool selectwindow)
     xdotool windowclose ${id}
 }
