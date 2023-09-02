@@ -3,7 +3,7 @@
 # (c) Kiëd Llaentenn <kiedtl@tilde.team>
 # See the COPYING file for copyright information.
 
-case "$(acpi -b)" in
-    *Charging*) sudo tlp setcharge 90 1 BAT0 ;;
-    *Not*charging*) sudo tlp setcharge 90 0 BAT0 ;;
+case "$(sudo tlp-stat -b | grep conservation_mode | cut -d' ' -f3)" in
+    0) sudo tlp setcharge 90 1 BAT0 ;;
+    1) sudo tlp setcharge 90 0 BAT0 ;;
 esac
