@@ -22,23 +22,26 @@ printf 'missing:\n'
 chk awk sed grep pgrep file less
 
 # rust utils
-chk exa fd rg tokei hyperfine dust
+chk exa fd rg tokei hyperfine ncdu
 
 # c programming
-chk gcc ld.lld make git gdb scdoc patch
+chk gcc make git gdb scdoc patch
 
 # other languages
-chk bash mksh cargo
+chk bash mksh cargo zig
+
+# music
+chk mpd cantata bluetuith
 
 # xorg
 if command -v X 2>/dev/null >&2
 then
     chk startx xsel xmodmap xdotool xsetroot \
-        xrdb xprop xcompmgr xautolock
+        xrdb xprop
 
     # xorg programs
-    chk mupdf feh 2bwm xterm dmenu slock polybar \
-        lemonbar
+    chk feh i3 i3lock-fancy alacritty dmenu slock polybar \
+        zathura firefox thunar
 
     # ricing
     chk wal paleta
@@ -54,6 +57,7 @@ chk ssh wpa_supplicant curl wget
 chk pv htop
 
 # misc
-chk xz bzip2 gzip unzip jq gfe lcharmap chue pesc
+# (res is fetchutils)
+chk xz bzip2 gzip unzip jq gfe chmap res
 
 printf '%s not found\n' "$missing"
