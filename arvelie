@@ -13,7 +13,7 @@ if date.year < 2000 then
 end
 
 local y = date.year - 2000
-local m_ind = math.floor((absday / 14) + 0.5) + 1
+local m_ind = math.floor((absday / 14) + 0.5)
 local m = ("ABCDEFGHIJKLMNOPQRSTUVWXYZ"):sub(m_ind, m_ind)
 local d = absday % 14
 local dstr = ("%02d%s%02d"):format(y, m, d)
