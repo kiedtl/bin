@@ -11,7 +11,9 @@ printf -v time '%(%I-%M-%S)T' -1
 mkdir -p "${scr_dir}/${date}"
 scr=${scr_dir}/${date}/${date}-${time}
 
-import -window root "$scr".png
+#import -window root "$scr".png
+import "$scr".png
 cp -f "$scr".png "${scr_dir}/current.png"
 
 [ -z "$1" ] || up f "${scr_dir}/current.png"
+xclip -selection clipboard -target image/png -i < "${scr_dir}/current.png"

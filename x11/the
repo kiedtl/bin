@@ -18,7 +18,7 @@ picked="$HOME/etc/colors/palettes/$1"
     exit 1;
 }
 
-palette=($(cat $picked | tr '\n' ' '))
+palette=($(cat $picked | tr '\n' ' ' | tr -d '#'))
 
 printf 'using %s\n' "$(basename $picked)"
 

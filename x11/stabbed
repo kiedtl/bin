@@ -4,4 +4,4 @@
 # See the COPYING file for copyright information.
 
 . $HOME/.cache/wal/colors.sh
-exec tabbed -U $color0 -u $color1 -O $color0 alacritty --embed
+exec tabbed -U $color0 -u $color1 -O $color0 -o $color7 alacritty --embed

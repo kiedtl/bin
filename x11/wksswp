@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
+# See the COPYING file for copyright information.
+
+# Sometimes I3SOCK might be out of date. Remove it to force i3-msg to find
+# actual pid of i3.
+unset I3SOCK
+
+new=$1
+current=$(i3-msg -t get_workspaces | \
+    jq 'map(select(.focused == true)) | .[].name' | \
+    tr -d '"')
+
+i3-msg "rename workspace $new to temporary; \
+    rename workspace $current to $new; \
+    rename workspace temporary to $current"
