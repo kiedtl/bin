@@ -1,0 +1,12 @@
+#!/bin/sh
+#
+# init-touchscreen - Initialize touchscreen input
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
+# See the COPYING file for copyright information.
+
+# https://www.reddit.com/r/i3wm/comments/h8i0nm/touchscreen_issues_when_using_second_monitor/
+monitor_id=$(xrandr --listmonitors | grep '^ 0' | awk '{print $4}')
+touchinput_id=$(xinput | grep Finger | awk -F'=' '{print $2}' | cut -f1)
+xinput map-to-output $touchinput_id $monitor_id
+
+touchegg &

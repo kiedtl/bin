@@ -1,0 +1,21 @@
+#!/bin/sh
+#
+# irc - tilde.town irc tunnel
+# (c) Kiëd Llaentenn <kiedtl@tilde.team>
+# See the COPYING file for copyright information.
+
+PIDFILE="/tmp/irc_ssh_pid"
+
+case "$1" in
+    start)
+        ssh -N town-irc -L localhost:6667:localhost:6667 &
+        echo $! > "$PIDFILE"
+    ;;
+    stop)
+        if [ -f "$PIDFILE" ]
+        then
+            kill $(cat "$PIDFILE")
+            rm -f "$PIDFILE"
+        fi
+    ;;
+esac
