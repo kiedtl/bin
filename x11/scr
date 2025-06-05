@@ -5,6 +5,9 @@
 
 scr_dir=~/img/screenshots
 
+# Give time for the dmenu window to go away...
+sleep 0.5
+
 printf -v date '%(%F)T' -1
 printf -v time '%(%I-%M-%S)T' -1
 
